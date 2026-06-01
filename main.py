@@ -6,6 +6,8 @@ TICKETS = [
     "PyCelonis API is returning 500 errors on all requests since 2pm",
     "How do I filter a dataframe by date range in PyCelonis?",
     "Please grant my colleague access to the Finance workspace",
+    "Error when running an automated script. Show us how to resolve it.",
+    "Is PyCelonis supposed to return a 500 Error for OCPM Data Models?",
 ]
 
 # Prompt 1: Role prompting — persona with signal cues
@@ -60,26 +62,39 @@ Classify the following ticket. Respond with ONLY the category label.
 # Prompt 3: Structured JSON output — best for programmatic use (winner)
 # Note: response includes markdown code fences (```json```) — strip before json.loads()
 SYSTEM_PROMPT_JSON = """
-You are a support ticket classifier for Celonis. Given a support ticket, respond
+<role>You are a support ticket classifier for Celonis.</role>
+
+<format>Given a support ticket, respond
 with a JSON object using exactly this schema:
 
 {
   "classification": "<INCIDENT | QUESTION | SERVICE_REQUEST>",
   "confidence": <number between 0.0 and 1.0>,
   "reasoning": "<one sentence explaining why>"
-}
+}</format>
 
-Definitions:
-- INCIDENT: Active system failure, error, or outage impacting the user right now.
-- QUESTION: Request for information or how-to guidance with no system malfunction.
-- SERVICE_REQUEST: Request to perform an action (access provisioning, configuration,
-  account changes).
+<definitions> Definitions:
+<definition> - INCIDENT: Active system failure, error, or 
+outage impacting the user right now.</definition>
+<definition> - QUESTION: Request for information or how-to 
+guidance with no system malfunction.</definition>
+<definition> - SERVICE_REQUEST: Request to perform an action 
+(access provisioning, configuration,
+account changes).</definition>
+</definitions>
 
-Rules:
-- Output ONLY valid JSON. No preamble, no explanation outside the JSON.
-- confidence should reflect how unambiguous the classification is (1.0 = clear).
-- reasoning must reference specific signal words from the ticket.
+<rules> Rules:
+<rule> - Output ONLY valid JSON. Do not include any preamble, no explanation. 
+Start your response with '{' and end with '}' and nothing </rule>
+outside the JSON.</rule>
+<rule> - confidence should reflect how unambiguous the classification 
+is (1.0 = clear).</rule>
+<rule> - reasoning must reference specific signal words from the 
+ticket.</rule>
+</rules>
 """
+
+PREFILL_JSON = "{"
 
 SYSTEM_PROMPTS = {
     "role": SYSTEM_PROMPT_ROLE,
@@ -96,7 +111,7 @@ def main() -> None:
         for i, ticket in enumerate(TICKETS, start=1):
             response = prompt_tester(
                 client=client,
-                message=ticket,
+                message=f"<ticket>{ticket}</ticket>",
                 system_message=system_message,
                 max_tokens=ANTHROPIC_MAX_TOKENS,
                 model=ANTHROPIC_MODEL,
