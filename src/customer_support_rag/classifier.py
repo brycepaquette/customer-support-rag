@@ -21,6 +21,10 @@ Respond only with valid JSON matching this exact schema:
 
 
 def classify_ticket(client: Anthropic, ticket_text: str) -> TicketClassification:
+
+    if not ticket_text.strip():
+        raise ValueError("Ticket text cannot be empty or whitespace")
+
     response_text = prompt_tester(
         client=client,
         system_message=CLASSIFICATION_SYSTEM_PROMPT,
