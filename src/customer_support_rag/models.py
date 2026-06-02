@@ -12,3 +12,22 @@ class TicketClassification(BaseModel):
     @classmethod
     def normalize_issue_type(cls, v: str) -> str:
         return v.strip().upper().replace(" ", "_")
+
+
+class Chunk(BaseModel):
+    chunk_id: str
+    text: str
+    source: str
+    chunk_index: int
+    token_count: int = Field(ge=1)
+
+
+class RetrievedChunk(Chunk):
+    similarity_score: float = Field(ge=0.0, le=1.0)
+
+
+class RAGResponse(BaseModel):
+    answer: str
+    sources: list[str]
+    retrieved_chunks: list[RetrievedChunk]
+    confidence: float = Field(ge=0.0, le=1.0)
