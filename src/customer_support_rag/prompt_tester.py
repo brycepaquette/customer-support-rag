@@ -5,8 +5,8 @@ from .config import ANTHROPIC_MAX_TOKENS, ANTHROPIC_MODEL, ANTHROPIC_TEMPERATURE
 
 def prompt_tester(
     client: Anthropic,
-    message: str,
     system_message: str,
+    message: str,
     temperature: float = ANTHROPIC_TEMPERATURE,
     max_tokens: int = ANTHROPIC_MAX_TOKENS,
     model: str = ANTHROPIC_MODEL,
