@@ -1,6 +1,7 @@
 import json
 
 from anthropic import Anthropic
+from langfuse import observe
 from pydantic import ValidationError
 
 from .models import TicketClassification
@@ -20,6 +21,7 @@ Respond only with valid JSON matching this exact schema:
  "reasoning": "..."}"""
 
 
+@observe(name="classify_ticket")
 def classify_ticket(client: Anthropic, ticket_text: str) -> TicketClassification:
 
     if not ticket_text.strip():
@@ -31,13 +33,17 @@ def classify_ticket(client: Anthropic, ticket_text: str) -> TicketClassification
         message=ticket_text,
     )
     clean = response_text.strip().removeprefix("```json").removesuffix("```").strip()
+
     try:
         data = json.loads(clean)
     except json.JSONDecodeError as e:
         raise ValueError(
             f"Failed to parse Claude response as JSON: {e}\nResponse: {clean}"
         ) from e
+
     try:
-        return TicketClassification.model_validate(data)
+        result = TicketClassification.model_validate(data)
     except ValidationError as e:
         raise ValueError(f"Claude response failed validation: {e}\nData: {data}") from e
+
+    return result
