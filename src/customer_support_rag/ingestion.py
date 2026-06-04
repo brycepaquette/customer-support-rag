@@ -98,6 +98,25 @@ def print_corpus_stats(documents: list[Document]) -> None:
     print(f"{'=' * 60}\n")
 
 
+def print_chunk_stats(chunks: list[Chunk]) -> None:
+    """Print summary statistics about the chunks."""
+    if not chunks:
+        print("No chunks created.")
+        return
+
+    total_tokens = sum(chunk.token_count for chunk in chunks)
+
+    print(f"\n{'=' * 60}")
+    print("Chunk Statistics")
+    print(f"{'=' * 60}")
+    print(f"Total chunks:         {len(chunks)}")
+    print(f"Total tokens:         {total_tokens:,}")
+    print(f"Avg tokens/chunk:     {total_tokens / len(chunks):.1f}")
+    print(f"Min tokens in chunk:  {min(chunk.token_count for chunk in chunks)}")
+    print(f"Max tokens in chunk:  {max(chunk.token_count for chunk in chunks)}")
+    print(f"{'=' * 60}\n")
+
+
 def chunk_document(
     document: Document, chunk_size: int = 400, overlap: int = 50
 ) -> list[Chunk]:
@@ -148,3 +167,4 @@ if __name__ == "__main__":
 
     docs = load_corpus(corpus_dir)
     print_corpus_stats(docs)
+    print_chunk_stats(chunk_corpus(docs))
