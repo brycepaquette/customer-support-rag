@@ -3,7 +3,7 @@ from pathlib import Path
 
 from bs4 import BeautifulSoup
 
-from customer_support_rag.models import Document
+from customer_support_rag.models import Chunk, Document
 
 
 def strip_html_boilerplate(html: str) -> str:
@@ -96,6 +96,48 @@ def print_corpus_stats(documents: list[Document]) -> None:
     print(f"Min words in a doc:   {min(doc.word_count for doc in documents)}")
     print(f"Max words in a doc:   {max(doc.word_count for doc in documents)}")
     print(f"{'=' * 60}\n")
+
+
+def chunk_document(
+    document: Document, chunk_size: int = 400, overlap: int = 50
+) -> list[Chunk]:
+    """Split a Document into overlapping Chunks."""
+    if overlap >= chunk_size:
+        raise ValueError(
+            f"overlap ({overlap}) must be less than chunk_size ({chunk_size})"
+        )
+    words = document.text.split()
+    chunks = []
+    start = 0
+    chunk_id = 0
+
+    while start < len(words):
+        end = min(start + chunk_size, len(words))
+        chunk_text = " ".join(words[start:end])
+        chunks.append(
+            Chunk(
+                chunk_id=f"{document.doc_id}_chunk{chunk_id}",
+                text=chunk_text,
+                source=document.source_url,
+                chunk_index=chunk_id,
+                token_count=int((end - start) / 0.75),
+            )
+        )
+        start += chunk_size - overlap
+        chunk_id += 1
+
+    return chunks
+
+
+def chunk_corpus(
+    documents: list[Document], chunk_size: int = 400, overlap: int = 50
+) -> list[Chunk]:
+    """Chunk all documents in the corpus."""
+    all_chunks = []
+    for doc in documents:
+        doc_chunks = chunk_document(doc, chunk_size, overlap)
+        all_chunks.extend(doc_chunks)
+    return all_chunks
 
 
 if __name__ == "__main__":
