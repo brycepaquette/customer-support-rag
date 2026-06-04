@@ -12,4 +12,4 @@ repos:
       - id: mypy
         args: [src/]
         pass_filenames: false
-        additional_dependencies: [types-requests, python-dotenv, anthropic, langfuse]
+        additional_dependencies: [types-requests, types-beautifulsoup4, python-dotenv, anthropic, langfuse]

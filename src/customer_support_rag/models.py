@@ -3,6 +3,14 @@ from typing import Literal
 from pydantic import BaseModel, Field, field_validator
 
 
+class Document(BaseModel):
+    doc_id: str
+    title: str
+    text: str
+    source_url: str
+    word_count: int
+
+
 class TicketClassification(BaseModel):
     issue_type: Literal["INCIDENT", "QUESTION", "SERVICE_REQUEST"]
     confidence: float = Field(ge=0.0, le=1.0)
