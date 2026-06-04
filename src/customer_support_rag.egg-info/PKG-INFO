@@ -1,9 +1,0 @@
-Metadata-Version: 2.4
-Name: customer-support-rag
-Version: 0.1.0
-Summary: Add your description here
-Author-email: b-paquette <b.paquette@celonis.com>
-Requires-Python: <3.15,>=3.12.4
-Requires-Dist: anthropic>=0.105.2
-Requires-Dist: pre-commit>=4.6.0
-Requires-Dist: python-dotenv>=1.2.2
