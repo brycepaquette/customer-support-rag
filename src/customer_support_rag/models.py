@@ -29,6 +29,11 @@ class Chunk(BaseModel):
     chunk_index: int
     token_count: int = Field(ge=1)
 
+    @staticmethod
+    def estimate_tokens(text: str) -> int:
+        """Estimate token count from text using the ~0.75 words per token heuristic."""
+        return max(1, int(len(text.split()) / 0.75))
+
 
 class RetrievedChunk(Chunk):
     similarity_score: float = Field(ge=0.0, le=1.0)

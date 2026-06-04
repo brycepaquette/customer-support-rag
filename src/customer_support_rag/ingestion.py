@@ -139,7 +139,7 @@ def chunk_document(
                 text=chunk_text,
                 source=document.source_url,
                 chunk_index=chunk_id,
-                token_count=int((end - start) / 0.75),
+                token_count=Chunk.estimate_tokens(chunk_text),
             )
         )
         start += chunk_size - overlap
