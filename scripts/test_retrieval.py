@@ -41,7 +41,7 @@ QUESTIONS = [
 @observe(name="eval_question")
 def run_question(question: str, collection: chromadb.Collection) -> None:
     with propagate_attributes(
-        tags=["day11-eval"],
+        tags=["test-retrieval-eval"],
         metadata={"question": question},
     ):
         print(f"\n{'=' * 80}")
