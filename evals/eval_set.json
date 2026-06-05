@@ -1,0 +1,122 @@
+[
+  {
+    "question_id": "q001",
+    "question": "How do I authenticate with the Celonis API?",
+    "expected_answer": "Celonis recommends OAuth 2.0 as the authentication method. API keys and Application keys also exist but are being discontinued because they have unlimited lifetime, cannot be rotated, and grant complete access to almost all Celonis APIs.",
+    "source_doc": "https://developer.celonis.com/celonis-apis/auth",
+    "difficulty": "medium",
+    "question_type": "factual"
+  },
+  {
+    "question_id": "q002",
+    "question": "How can I install a REST Client?",
+    "expected_answer": "Use Postman, a free REST client. Download it from https://www.postman.com/downloads/ for your operating system, install it, then either create an account or click 'Skip and go to the app' to start using it.",
+    "source_doc": "https://developer.celonis.com/celonis-apis/rest-client",
+    "difficulty": "easy",
+    "question_type": "factual"
+  },
+  {
+    "question_id": "q003",
+    "question": "What are the rate limits for the Celonis API?",
+    "expected_answer": "Rate limits vary by API. The default values for the Knowledge Model API are 6000 requests/day, 20 requests/second, and a maximum of 200 fields per request.",
+    "source_doc": "https://developer.celonis.com/celonis-apis/rate-limiting",
+    "difficulty": "medium",
+    "question_type": "factual"
+  },
+  {
+    "question_id": "q004",
+    "question": "How do I export data from a data pool?",
+    "expected_answer": "I don't have enough information to answer this question from the provided documentation.",
+    "source_doc": "N/A",
+    "difficulty": "hard",
+    "question_type": "edge"
+  },
+  {
+    "question_id": "q005",
+    "question": "How do I retrieve a record by its ID?",
+    "expected_answer": "Send a GET request to the resource endpoint with the ID as a path parameter. For example, GET /{collectionId}/{storageId}/_api/rest/facets/{facetId}/views/{viewId}/elements/{elementId}/attributes/{attributeId} retrieves a specific attribute and returns a JSON response with a `count` and `values` field.",
+    "source_doc": "https://developer.celonis.com/cpm/developer/rest-api/reference/attributes-get",
+    "difficulty": "medium",
+    "question_type": "factual"
+  },
+  {
+    "question_id": "q006",
+    "question": "What is the capital of France?",
+    "expected_answer": "I don't have enough information to answer this question from the provided documentation.",
+    "source_doc": "N/A",
+    "difficulty": "easy",
+    "question_type": "edge"
+  },
+  {
+    "question_id": "q007",
+    "question": "What HTTP status code is returned when the API rate limit is exceeded?",
+    "expected_answer": "429 (Too Many Requests). The response also includes an `x-ratelimit-reset` header indicating the seconds to wait before retrying.",
+    "source_doc": "https://developer.celonis.com/celonis-apis/rate-limiting",
+    "difficulty": "easy",
+    "question_type": "factual"
+  },
+  {
+    "question_id": "q008",
+    "question": "What header is used for request tracing?",
+    "expected_answer": "I don't have enough information to answer this question from the provided documentation.",
+    "source_doc": "N/A",
+    "difficulty": "medium",
+    "question_type": "edge"
+  },
+  {
+    "question_id": "q009",
+    "question": "What is the SCIM API used for?",
+    "expected_answer": "The SCIM API allows for managing groups and users within the Celonis Platform. It is used to manage user identities across cloud-based applications and to integrate identity providers such as Active Directory and Okta to automatically provision and manage Celonis users and groups. All SCIM operations are scoped to a team.",
+    "source_doc": "https://developer.celonis.com/celonis-apis/scim-api/overview",
+    "difficulty": "easy",
+    "question_type": "conceptual"
+  },
+  {
+    "question_id": "q010",
+    "question": "What is the difference between basic authentication and OAuth in Celonis APIs?",
+    "expected_answer": "Basic authentication uses static API keys or Application keys with unlimited lifetime, no rotation, and access to almost all Celonis APIs (public and private). OAuth 2.0 uses time-limited tokens and scopes (e.g. `studio`, `audit.log:read`) that restrict access following the principle of least privilege. OAuth is the recommended approach; API and Application keys are being discontinued.",
+    "source_doc": "https://developer.celonis.com/celonis-apis/auth",
+    "difficulty": "hard",
+    "question_type": "conceptual"
+  },
+  {
+    "question_id": "q011",
+    "question": "How does pagination work in Celonis APIs?",
+    "expected_answer": "Celonis APIs use page-based pagination on endpoints that return lists. It is controlled by two parameters: `page` (the page number, starting from 0) and `pageSize` (items per page, default 50). The maximum `page` value depends on the total number of records and the configured `pageSize`.",
+    "source_doc": "https://developer.celonis.com/celonis-apis/pagination",
+    "difficulty": "medium",
+    "question_type": "conceptual"
+  },
+  {
+    "question_id": "q012",
+    "question": "How does the Data Push API transfer data into the Celonis Platform?",
+    "expected_answer": "The Data Push API uses micro-batching: instead of one huge transfer or inserting records individually, it creates, executes, and monitors many smaller transfers. The flow has four stages: (1) Create data push — define the target data pool, connection, and table (optionally schema and primary keys for delta loads); (2) Push chunk — push the data in chunks using Parquet (preferred) or CSV; (3) Submit push job — asynchronous; (4) List push jobs — view and monitor job status. Each chunk is limited to 1 GB but there is no limit on the number of chunks or combined size.",
+    "source_doc": "https://developer.celonis.com/celonis-apis/using-data-push-api",
+    "difficulty": "hard",
+    "question_type": "conceptual"
+  },
+  {
+    "question_id": "q013",
+    "question": "Which authentication options are available for the Data Push API?",
+    "expected_answer": "Three options: (1) OAuth client (recommended) — created in Admin & Settings → Applications, requires the `integration.data-pools:data_push` or `integration.data-pools` scope plus Data Push API permission on the target data pool; (2) API key — created in a user profile, mirrors that user's permissions, displayed only at creation time; (3) Application key — granted permissions explicitly after creation (no permissions by default).",
+    "source_doc": "https://developer.celonis.com/celonis-apis/using-data-push-api",
+    "difficulty": "medium",
+    "question_type": "conceptual"
+  },
+  {
+    "question_id": "q014",
+    "question": "Why is Celonis migrating away from API keys and Application keys toward OAuth 2.0?",
+    "expected_answer": "API keys and Application keys are not industry-standard. They have unlimited lifetime, cannot be rotated (users must delete and recreate them), and — especially for API keys — they grant any application complete access to almost all Celonis APIs with no way to restrict access to specific resources. OAuth 2.0 is the industry standard, uses scopes (e.g. `studio`, `audit.log:read`) so clients can only access APIs allowed by their scopes, and combined with Celonis permissions enforces the principle of least privilege. Celonis is in the process of moving away from long-term keys toward OAuth.",
+    "source_doc": "https://developer.celonis.com/celonis-apis/auth",
+    "difficulty": "hard",
+    "question_type": "multi_hop"
+  },
+  {
+    "question_id": "q015",
+    "question": "What is the difference between a 401 and a 403 response from a Celonis API?",
+    "expected_answer": "A 401 (Unauthorized) is returned when the request does not provide a Bearer token, or when the Authorization header is empty or has an invalid format (it must start with `Bearer` or `AppKey`, case insensitive). A 403 (Forbidden) is returned when the caller is authenticated but lacks permission to access the specific resource (e.g. error code `ADMIN_ACCESS_ERROR`), or when the API itself is disabled.",
+    "source_doc": "https://developer.celonis.com/celonis-apis/api-reference/common-error-catalog",
+    "difficulty": "medium",
+    "question_type": "conceptual"
+  }
+]
