@@ -1,12 +1,12 @@
 import json
 
-import chromadb
 from langfuse import observe
 
 from .client import get_client
 from .models import RAGResponse
 from .prompt_tester import prompt_tester
 from .retrieval import retrieve
+from .vector_store import HybridStore
 
 SYSTEM_PROMPT = """You are a Celonis support assistant. Answer questions using ONLY the information in the <context> tags provided in the user message.
 
@@ -27,10 +27,10 @@ Respond with a single JSON object matching this schema (no markdown, no prose ou
 @observe(name="rag_query")
 def rag_query(
     query: str,
-    collection: chromadb.Collection,
+    store: HybridStore,
     top_k: int = 5,
 ) -> RAGResponse:
-    retrieved = retrieve(query, collection, top_k=top_k)
+    retrieved = retrieve(query, store, top_k=top_k)
 
     context = "\n\n".join(f"[Source: {c.source}]\n{c.text}" for c in retrieved)
     user_message = f"<context>\n{context}\n</context>\n\n<question>{query}</question>"

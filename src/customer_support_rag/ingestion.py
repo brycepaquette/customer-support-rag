@@ -15,9 +15,13 @@ def strip_html_boilerplate(html: str) -> str:
         tag.decompose()
 
     # Get main content (usually in article, main, or content div)
-    content = soup.find(["article", "main", "div.content"])
-    if content is None:
-        content = soup.body if soup.body else soup
+    content = (
+        soup.find("article")
+        or soup.find("main")
+        or soup.select_one("div.content")
+        or soup.body
+        or soup
+    )
 
     # Extract text with some structure preservation
     text = content.get_text(separator="\n", strip=True)
@@ -130,9 +134,16 @@ def chunk_document(
     start = 0
     chunk_id = 0
 
+    # Tokens derived from the URL path help BM25 match queries that name the
+    # API ("Permissions API", "Team API") on short overview pages.
+    slug_tokens = " ".join(document.source_url.rsplit("/", 3)[-2:].__iter__()).replace(
+        "-", " "
+    )
+    header = f"{document.title}\n{slug_tokens}\n\n"
+
     while start < len(words):
         end = min(start + chunk_size, len(words))
-        chunk_text = " ".join(words[start:end])
+        chunk_text = header + " ".join(words[start:end])
         chunks.append(
             Chunk(
                 chunk_id=f"{document.doc_id}_chunk{chunk_id}",
