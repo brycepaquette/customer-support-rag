@@ -1,5 +1,22 @@
 # Customer Support RAG — Evaluation & Design Notes
 
+## Correction (Day 15, 2026-06-05) — Q8 is a corpus bug, not a retrieval bug
+
+While porting the Day 13 questions into `evals/eval_set.json`, I went to look up the ground-truth header name in `corpus/celonis-apis_req-tracing.html` and found the file has **zero `<p>` tags**. It's a 289 KB shell of JS bundle + nav chrome with a single `<h1>API Request Tracing</h1>` and no body content. The page is JS-rendered and the crawler captured an empty shell.
+
+A corpus-wide audit (`<p>` count per file) found **~40 docs (~13% of the corpus) are content-empty stubs**, including `celonis-apis_oauth-authentication.html`, all the `_models_*` schema reference pages, and most glossaries.
+
+**Implications:**
+
+- **Q8's diagnosis below is wrong.** The system refused correctly — there is no header name to retrieve. BM25 can't retrieve content that doesn't exist. The "rare term lost to high-freq token" classification doesn't apply here.
+- **Backlog item #1 (BM25) loses one of its three justifying instances.** It still helps MCP and "export" cases, but it's no longer "three confirmed cases of this class."
+- **New backlog item (top priority candidate): headless rescrape.** Re-ingest the stub pages with Playwright / a headless browser so JS-rendered content is captured. Without this, the eval upper bound is capped — questions whose ground truth lives only on a stub page can never be answered.
+- **Eval-set treatment:** Q4, Q6, and Q8 are encoded as `question_type="edge"` with the literal refusal string as `expected_answer`. Refusal correctness is now a first-class metric.
+
+The original Day 13 analysis is preserved below as the historical record. Strike-through would be dishonest; the misdiagnosis itself is the lesson — answers verified from the corpus only, not from intuition about what the corpus "should" contain.
+
+---
+
 ## Day 13 — 10-question eval (2026-06-05)
 
 **Setup:** top_k=3, sentence-transformers all-MiniLM-L6-v2, chromadb (cosine), claude-sonnet-4-6, refusal-mode system prompt, hybrid confidence = `min(claude_self_confidence, top_sim)`.
@@ -55,7 +72,10 @@ Confidence tracks quality directionally. Floor (refusals = 0.0) is hard. Ceiling
 
 ## Improvement backlog (priority order)
 
-1. **BM25 hybrid retrieval** — fixes "request tracing" / "MCP" / "export" class. Highest ROI for Week 3.
+> Updated Day 15: headless rescrape promoted to #1 after corpus-stub discovery. See correction at top.
+
+0. **Headless rescrape of stub pages (Day 15 discovery)** — ~40 corpus files captured as JS-rendered shells with no body content (`req-tracing`, `oauth-authentication`, all `_models_*`, most glossaries). Without this, the corpus has a hard recall ceiling.
+1. **BM25 hybrid retrieval** — fixes "MCP" / "export" class (2 confirmed instances; Q8 reclassified as corpus bug, see correction).
 2. **Cross-encoder re-rank on top-10** — would fix Q5 rank-2 case and similar near-misses without changing the index.
 3. **Strip boilerplate from chunks** — repeated nav/footer/"Copy for LLM" text dilutes embeddings; visible in low scores across the board.
 4. **k=5 instead of k=3** — cheap; might let Claude synthesize from rank-4/5 chunks.
