@@ -12,10 +12,14 @@ from customer_support_rag.vector_store import build_vector_store
 QUESTIONS = [
     "How do I authenticate with the Celonis API?",
     "How can I install a REST Client?",
-    "What are the rate limits for the MCP API?",
-    "How do I export data from a data pool?",
+    "What are the rate limits for the API?",
+    "How do I export data from a data pool?",  # must refuse
     "How to retrieve a record by its ID?",
-    "What is the capital of France?",  # out-of-domain probe — must refuse
+    "What is the capital of France?",  # must refuse
+    "What HTTP status code is returned when the API rate limit is exceeded?",
+    "What header is used for request tracing?",
+    "What is the SCIM API used for?",
+    "What is the difference between basic authentication and OAuth in Celonis APIs?",
 ]
 
 
