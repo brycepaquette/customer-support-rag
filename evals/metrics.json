@@ -1,0 +1,11 @@
+{
+  "n_cases": 30,
+  "n_non_edge": 24,
+  "n_edge": 6,
+  "n_errors": 0,
+  "recall_at_1": 0.5416666666666666,
+  "recall_at_5": 0.9166666666666666,
+  "recall_at_10": 1.0,
+  "refusal_accuracy": 1.0,
+  "mean_confidence": 0.47467371185620627
+}

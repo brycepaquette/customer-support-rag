@@ -39,6 +39,7 @@ select = ["E", "F", "I", "UP", "B", "SIM", "PL"]
 
 [tool.ruff.lint.per-file-ignores]
 "src/customer_support_rag/generator.py" = ["E501"]
+"tests/*" = ["PLR2004"]
 
 [tool.ruff.lint.pylint]
 max-args = 12

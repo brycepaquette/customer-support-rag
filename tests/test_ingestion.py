@@ -12,7 +12,8 @@ def test_short_document():
     chunks = chunk_document(doc, chunk_size=10, overlap=2)
     assert len(chunks) == 1
     assert chunks[0].chunk_id == "test1_chunk0"
-    assert chunks[0].text == "This is a short document."
+    assert chunks[0].text.endswith("This is a short document.")
+    assert "Short Document" in chunks[0].text
 
 
 def test_chunks_have_unique_ids():
