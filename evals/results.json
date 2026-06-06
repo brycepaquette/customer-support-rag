@@ -6,22 +6,22 @@
     "question_type": "factual",
     "expected_answer": "Celonis recommends OAuth 2.0 as the authentication method. API keys and Application keys also exist but are being discontinued because they have unlimited lifetime, cannot be rotated, and grant complete access to almost all Celonis APIs.",
     "expected_source": "https://developer.celonis.com/celonis-apis/auth",
-    "actual_answer": "Celonis supports several authentication methods for its APIs:\n\n1. **OAuth 2.0 (Recommended):** The preferred and most secure method. You create an OAuth 2.0 client and use it to generate tokens. Two grant types are supported:\n   - **Client Credentials** (machine-to-machine): POST to `https://<team>.<cluster>.celonis.cloud/oauth2/token` with your `client_id`, `client_secret`, `grant_type=client_credentials`, and desired `scope`.\n   - **Authorization Code** (currently in private preview): A two-step process \u2014 first request an authorization code via GET to the `/oauth2/authorize` endpoint, then exchange it for an access token via POST to `/oauth2/token`.\n   \n   Once you have a token, include it in the HTTP Authorization header:\n   `Authorization: Bearer <access_token>`\n\n2. **User API Key (Bearer Token) \u2014 To be discontinued:** Create a token in the Celonis Platform and include it as:\n   `Authorization: Bearer <YOUR_KEY>`\n\n3. **Application API Key (AppKey) \u2014 To be discontinued:** Create an AppKey in the Celonis Platform and include it as:\n   `Authorization: AppKey <YOUR_KEY>`\n\n**Important notes:**\n- Credentials must always be sent in the **Authorization HTTP header**. Credentials sent in the URL or request body will be ignored.\n- OAuth clients must be configured with the appropriate **scopes** for the APIs they need to access (e.g., `intelligence.knowledge-models:read` for the Knowledge Model API).\n- In addition to scopes, the OAuth client or API key must also have the correct **Celonis platform permissions** on the relevant resources (e.g., USE PACKAGE rights on a Studio package).\n\nCelonis strongly recommends migrating to OAuth 2.0, as API and Application keys are being phased out.",
+    "actual_answer": "Celonis APIs support multiple authentication methods:\n\n1. **OAuth 2.0 (Recommended):** The preferred and most secure method. You create an OAuth 2.0 client and use it to generate tokens. There are two grant types:\n   - **Client Credentials:** For machine-to-machine authentication. Send a POST request to `https://<team>.<cluster>.celonis.cloud/oauth2/token` with your `client_id`, `client_secret`, `grant_type=client_credentials`, and desired `scope`.\n   - **Authorization Code:** The most common grant type; the authorization server returns a single-use code that is exchanged for an access token (currently in private preview).\n   \n   Once you have a token, include it in the Authorization header:\n   `Authorization: Bearer <access_token>`\n\n2. **User API Key (Bearer Token) \u2014 To be discontinued:** Create a token in the Celonis Platform and include it as:\n   `Authorization: Bearer <YOUR_KEY>`\n\n3. **Application API Key (AppKey) \u2014 To be discontinued:** Create an AppKey in the Celonis Platform and include it as:\n   `Authorization: AppKey <YOUR_KEY>`\n\n**Important notes:**\n- Credentials must be sent in the **Authorization header** of the HTTP request. Credentials sent in the URL or body will be ignored.\n- OAuth clients must be configured with the appropriate **scopes** for the APIs they need to access (e.g., `intelligence.conversations:write` for the Chat API, `audit.log:read` for the Audit Log API, etc.).\n- In addition to scopes, the API key or OAuth client must also have the appropriate **Celonis permissions** on the relevant resources (e.g., USE PACKAGE rights on Studio packages).\n\nCelonis strongly recommends migrating to OAuth 2.0, as API and Application keys are being phased out.",
     "actual_sources": [
       "https://developer.celonis.com/celonis-apis/auth",
       "https://developer.celonis.com/celonis-apis/migrating-to-oauth",
-      "https://developer.celonis.com/process-intelligence-apis/knowledge-model-api/get-started/getting-started"
+      "https://developer.celonis.com/data-ingestion-api/getting-started"
     ],
     "confidence": 0.8396373391151428,
     "retrieved_sources": [
       "https://developer.celonis.com/celonis-apis/auth",
-      "https://developer.celonis.com/process-intelligence-apis/knowledge-model-api/get-started/getting-started",
-      "https://developer.celonis.com/celonis-apis/auth",
-      "https://developer.celonis.com/data-ingestion-api/getting-started",
-      "https://developer.celonis.com/data-ingestion-api/getting-started",
       "https://developer.celonis.com/process-intelligence-apis/agents-api/get-started/getting-started",
+      "https://developer.celonis.com/process-intelligence-apis/knowledge-model-api/get-started/getting-started",
+      "https://developer.celonis.com/data-ingestion-api/getting-started",
       "https://developer.celonis.com/process-intelligence-apis/subscription-api/get-started/getting-started",
+      "https://developer.celonis.com/data-ingestion-api/getting-started",
       "https://developer.celonis.com/celonis-apis/get-started-with-celonis-apis",
+      "https://developer.celonis.com/celonis-apis/auth",
       "https://developer.celonis.com/celonis-apis/migrating-to-oauth",
       "https://developer.celonis.com/celonis-apis/migrating-to-oauth"
     ]
@@ -33,7 +33,7 @@
     "question_type": "factual",
     "expected_answer": "Use Postman, a free REST client. Download it from https://www.postman.com/downloads/ for your operating system, install it, then either create an account or click 'Skip and go to the app' to start using it.",
     "expected_source": "https://developer.celonis.com/celonis-apis/rest-client",
-    "actual_answer": "To install a REST client for use with Celonis APIs, the recommended tool is **Postman**, which is a popular and free REST client. Here are the steps:\n\n1. Go to the **Postman Download page** and download the version for your Operating System.\n2. Once the download is complete, **install it** on your computer.\n3. Once installed, **create an account** or click the **\"Skip and go to the app\"** link to start using it.\n\nNote: If you already have a REST client, you can skip this process and use your existing one.",
+    "actual_answer": "To install a REST client for use with Celonis APIs, the recommended tool is **Postman**, which is a popular and free REST client. Here are the steps:\n\n1. Go to the **Postman Download page** and download the version for your Operating System.\n2. Once downloaded, **install it** on your computer.\n3. Once installed, **create an account** or click the **\"Skip and go to the app\"** link to start using it.\n\nNote: If you already have a REST client, you can skip this process entirely.",
     "actual_sources": [
       "https://developer.celonis.com/celonis-apis/rest-client",
       "https://developer.celonis.com/data-ingestion-api/getting-started"
@@ -42,14 +42,14 @@
     "retrieved_sources": [
       "https://developer.celonis.com/celonis-apis/rest-client",
       "https://developer.celonis.com/cpm/developer/rest-api/how-to/rest-symbio-auth-token-client-temp-example-documentation/rest-symbio-auth-token-client-temp-example-documentation",
-      "https://developer.celonis.com/process-intelligence-apis/agents-api/api-reference/try-it",
-      "https://developer.celonis.com/data-ingestion-api/getting-started",
-      "https://developer.celonis.com/process-intelligence-apis/subscription-api/api-reference/try-it",
-      "https://developer.celonis.com/process-intelligence-apis/knowledge-model-api/api-reference/try-it",
-      "https://developer.celonis.com/celonis-apis/auth",
-      "https://developer.celonis.com/process-intelligence-apis/knowledge-model-api/get-started/getting-started",
       "https://developer.celonis.com/cpm/developer/rest-api/how-to/javascript",
-      "https://developer.celonis.com/process-intelligence-apis/agents-api/get-started/getting-started"
+      "https://developer.celonis.com/process-intelligence-apis/agents-api/get-started/getting-started",
+      "https://developer.celonis.com/data-ingestion-api/getting-started",
+      "https://developer.celonis.com/process-intelligence-apis/agents-api/api-reference/try-it",
+      "https://developer.celonis.com/process-intelligence-apis/knowledge-model-api/get-started/getting-started",
+      "https://developer.celonis.com/process-intelligence-apis/knowledge-model-api/api-reference/try-it",
+      "https://developer.celonis.com/process-intelligence-apis/subscription-api/api-reference/try-it",
+      "https://developer.celonis.com/celonis-apis/auth"
     ]
   },
   {
@@ -59,28 +59,28 @@
     "question_type": "factual",
     "expected_answer": "Rate limits vary by API. The default values for the Knowledge Model API are 6000 requests/day, 20 requests/second, and a maximum of 200 fields per request.",
     "expected_source": "https://developer.celonis.com/celonis-apis/rate-limiting",
-    "actual_answer": "Celonis enforces rate limits across several API families. Here is a summary:\n\n**Knowledge Model API (default limits):**\n- Max requests/day: 6,000\n- Max requests/second: 20\n- Max fields per request: 200\n- Max records via /data endpoint: First 5,000 records per filtered/sorted table\n- Concurrency limit: 20 simultaneous requests\n\n**Knowledge Model API license tiers (soft limits):**\n- S: 6,000 daily requests, max page size 50\n- M: 12,000 daily requests, max page size 100\n- L: 25,000 daily requests, max page size 500\n- XL: 50,000 daily requests, max page size 5,000\n\n**Data Push API:**\n- 10 requests/second\n- 250 requests/hour (interval starts at the full hour, UTC-based)\n- 1 GB data limit per data chunk (no limit on number of chunks)\n\n**Subscription API (default/soft limits):**\n- Max subscriptions per team: 10\n- Max daily events per team: 100,000\n- Concurrency limit: 20 simultaneous requests\n\n**Agents API (soft limits):**\n- S: 6,000 daily requests\n- M: 12,000 daily requests\n- L: 25,000 daily requests\n- XL: 50,000 daily requests\n- Concurrency (hard limit): 20 simultaneous requests\n\n**When a rate limit is exceeded**, the API returns a **429 (Too Many Requests)** response with the header `x-ratelimit-reset` indicating how many seconds to wait. Each response also includes `x-ratelimit-limit` and `x-ratelimit-remaining` headers.\n\nCelonis reserves the right to adjust these limits at any time and may temporarily or permanently suspend access for clients that repeatedly exceed limits.",
+    "actual_answer": "Celonis enforces rate limits across several APIs. Here is a summary:\n\n**Knowledge Model API (default limits):**\n- Max requests/day: 6,000\n- Max requests/second: 20\n- Max fields per request: 200\n- Max records via /data endpoint: First 5,000 records per filtered/sorted table\n- Soft limits by size tier: S=6,000/day, M=12,000/day, L=25,000/day, XL=50,000/day\n- Hard limit: Concurrency limit of 20 simultaneous requests\n\n**Data Push API:**\n- 10 requests/second\n- 250 requests/hour (interval starts at the full hour, UTC-based)\n- 1 GB data limit per data chunk (no limit on number of chunks)\n\n**Subscription API (default limits):**\n- Max subscriptions per team: 10\n- Max daily events per team: 100,000\n- Soft limits by size tier: S=10 subscriptions/100K events, M=20/200K, L=50/500K, XL=100/1,000,000\n- Hard limit: Concurrency limit of 20 simultaneous requests\n\n**Agents API:**\n- Concurrency limit: 20 simultaneous requests (hard limit)\n- Soft limits by size tier: S=6,000/day, M=12,000/day, L=25,000/day, XL=50,000/day\n\n**When limits are exceeded:**\n- The API returns a **429 (Too Many Requests)** response\n- The `x-ratelimit-reset` header indicates wait time in seconds\n- `x-ratelimit-limit`: max requests in current time window\n- `x-ratelimit-remaining`: remaining requests in current time window\n\nCelonis reserves the right to adjust these limits at any time.",
     "actual_sources": [
       "https://developer.celonis.com/celonis-apis/rate-limiting",
       "https://developer.celonis.com/process-intelligence-apis/knowledge-model-api/get-started/rate-limiting",
-      "https://developer.celonis.com/celonis-apis/using-data-push-api",
-      "https://developer.celonis.com/process-intelligence-apis/subscription-api/get-started/rate-limiting",
       "https://developer.celonis.com/process-intelligence-apis/knowledge-model-api/terms",
-      "https://developer.celonis.com/process-intelligence-apis/agents-api/terms",
-      "https://developer.celonis.com/process-intelligence-apis/subscription-api/terms"
-    ],
-    "confidence": 0.8048121929168701,
-    "retrieved_sources": [
-      "https://developer.celonis.com/celonis-apis/get-started-with-celonis-apis",
-      "https://developer.celonis.com/celonis-apis/rate-limiting",
-      "https://developer.celonis.com/process-intelligence-apis/knowledge-model-api/get-started/rate-limiting",
-      "https://developer.celonis.com/celonis-apis/using-data-push-api",
       "https://developer.celonis.com/process-intelligence-apis/subscription-api/get-started/rate-limiting",
-      "https://developer.celonis.com/celonis-apis/api-reference/common-error-catalog",
-      "https://developer.celonis.com/celonis-apis/get-started-with-celonis-apis",
-      "https://developer.celonis.com/process-intelligence-apis/agents-api/terms",
       "https://developer.celonis.com/process-intelligence-apis/subscription-api/terms",
-      "https://developer.celonis.com/process-intelligence-apis/knowledge-model-api/terms"
+      "https://developer.celonis.com/celonis-apis/using-data-push-api",
+      "https://developer.celonis.com/process-intelligence-apis/agents-api/terms"
+    ],
+    "confidence": 0.7682345509529114,
+    "retrieved_sources": [
+      "https://developer.celonis.com/celonis-apis/rate-limiting",
+      "https://developer.celonis.com/celonis-apis/get-started-with-celonis-apis",
+      "https://developer.celonis.com/process-intelligence-apis/knowledge-model-api/get-started/rate-limiting",
+      "https://developer.celonis.com/celonis-apis/api-reference/common-error-catalog",
+      "https://developer.celonis.com/process-intelligence-apis/subscription-api/get-started/rate-limiting",
+      "https://developer.celonis.com/process-intelligence-apis/agents-api/terms",
+      "https://developer.celonis.com/celonis-apis/using-data-push-api",
+      "https://developer.celonis.com/process-intelligence-apis/knowledge-model-api/terms",
+      "https://developer.celonis.com/process-intelligence-apis/subscription-api/terms",
+      "https://developer.celonis.com/celonis-apis/get-started-with-celonis-apis"
     ]
   },
   {
@@ -94,16 +94,16 @@
     "actual_sources": [],
     "confidence": 0.0,
     "retrieved_sources": [
-      "https://developer.celonis.com/celonis-apis/data-job-execution-api",
-      "https://developer.celonis.com/data-ingestion-api/standard/using/standard/data/ingestion",
-      "https://developer.celonis.com/data-ingestion-api/sucessful-push",
-      "https://developer.celonis.com/data-ingestion-api/getting-started",
       "https://developer.celonis.com/celonis-apis/process-data-model-api",
-      "https://developer.celonis.com/data-ingestion-api/getting-started",
-      "https://developer.celonis.com/process-intelligence-apis/knowledge-model-api/tutorials/learning/retrieve-record-data",
+      "https://developer.celonis.com/data-ingestion-api/standard/using/standard/data/ingestion",
+      "https://developer.celonis.com/celonis-apis/data-job-execution-api",
+      "https://developer.celonis.com/celonis-apis/process-data-model-api",
       "https://developer.celonis.com/celonis-apis/using-data-push-api",
+      "https://developer.celonis.com/data-ingestion-api/getting-started",
+      "https://developer.celonis.com/data-ingestion-api/getting-started",
       "https://developer.celonis.com/celonis-apis/migrating-to-oauth",
-      "https://developer.celonis.com/celonis-apis/process-data-model-api"
+      "https://developer.celonis.com/data-ingestion-api/sucessful-push",
+      "https://developer.celonis.com/process-intelligence-apis/knowledge-model-api/tutorials/learning/retrieve-record-data"
     ]
   },
   {
@@ -113,23 +113,23 @@
     "question_type": "factual",
     "expected_answer": "Build a URL of the form https://<team>.<cluster>.celonis.cloud/intelligence/api/knowledge-models/<km_id>/records/<record_id>/data and pass a mandatory `fields` query parameter listing the case-sensitive field IDs (Attributes, Augmented Attributes, or Flags) you want returned, e.g. fields=ID,ACTIVITIES,EVENTTIME. A maximum of 200 objects per record can be returned through the data endpoint.",
     "expected_source": "https://developer.celonis.com/process-intelligence-apis/knowledge-model-api/tutorials/learning/retrieve-record-data",
-    "actual_answer": "To retrieve data for a record by its ID, you need to build a URL following this pattern:\n\nhttps://<team>.<cluster>.celonis.cloud/intelligence/api/knowledge-models/<km_id>/records/<record_id>/data\n\nWhere:\n- <team> is the name for your team in the EMS\n- <cluster> is the cluster assigned to you (e.g., us-2, eu-3)\n- <km_id> is the ID for the Knowledge Model you want to query (obtainable via the schema endpoints)\n- <record_id> is the ID for the record (also obtainable via the schema endpoints)\n\nImportant: The URL alone is not sufficient. You must also specify the fields you want to retrieve using the mandatory `fields` query parameter, which takes a comma-separated list of field IDs (e.g., `fields=ID,ACTIVITIES,EVENTTIME`). Note that field IDs are case-sensitive.\n\nThe fields can be any of the following record objects:\n- Attributes\n- Augmented Attributes\n- Flags\n\nThe maximum number of objects per record that can be retrieved is 200.",
+    "actual_answer": "To retrieve data for a record by its ID, you need to build a URL following this pattern:\n\nhttps://<team>.<cluster>.celonis.cloud/intelligence/api/knowledge-models/<km_id>/records/<record_id>/data\n\nWhere:\n- <team> is the name for your team in the EMS\n- <cluster> is the cluster assigned to you (e.g., us-2, eu-3)\n- <km_id> is the ID for the Knowledge Model you want to query (obtainable via schema endpoints)\n- <record_id> is the ID for the record (also obtainable via schema endpoints)\n\nNote that the URL alone is not sufficient \u2014 you must also specify the fields you want to retrieve using the mandatory `fields` query parameter, providing a comma-separated list of field IDs (e.g., `fields=ID,ACTIVITIES,EVENTTIME`). The field IDs are case-sensitive and must match those returned by the record schema endpoint.",
     "actual_sources": [
       "https://developer.celonis.com/process-intelligence-apis/knowledge-model-api/tutorials/learning/retrieve-record-data",
       "https://developer.celonis.com/process-intelligence-apis/knowledge-model-api/get-started/field-selection"
     ],
-    "confidence": 0.31325238943099976,
+    "confidence": 0.2576848268508911,
     "retrieved_sources": [
       "https://developer.celonis.com/process-intelligence-apis/knowledge-model-api/tutorials/learning/retrieve-record-data",
       "https://developer.celonis.com/process-intelligence-apis/knowledge-model-api/tutorials/learning/retrieve-record-data",
-      "https://developer.celonis.com/cpm/developer/rest-api/reference/elements-get",
-      "https://developer.celonis.com/process-intelligence-apis/knowledge-model-api/faq",
-      "https://developer.celonis.com/cpm/developer/rest-api/reference/elements-get",
-      "https://developer.celonis.com/process-intelligence-apis/knowledge-model-api/overview",
-      "https://developer.celonis.com/cpm/developer/rest-api/reference/related-get",
       "https://developer.celonis.com/process-intelligence-apis/knowledge-model-api/get-started/field-selection",
+      "https://developer.celonis.com/process-intelligence-apis/knowledge-model-api/faq",
+      "https://developer.celonis.com/process-intelligence-apis/knowledge-model-api/overview",
+      "https://developer.celonis.com/process-intelligence-apis/subscription-api/api-reference/try-it",
+      "https://developer.celonis.com/cpm/developer/rest-api/reference/related-get",
       "https://developer.celonis.com/cpm/developer/rest-api/reference/elements-get",
-      "https://developer.celonis.com/process-intelligence-apis/subscription-api/api-reference/try-it"
+      "https://developer.celonis.com/cpm/developer/rest-api/reference/elements-get",
+      "https://developer.celonis.com/cpm/developer/rest-api/reference/elements-get"
     ]
   },
   {
@@ -143,16 +143,16 @@
     "actual_sources": [],
     "confidence": 0.0,
     "retrieved_sources": [
-      "https://developer.celonis.com/celonis-apis/auth",
-      "https://developer.celonis.com/process-intelligence-apis/subscription-api/tutorials/learning/managing-subscription",
-      "https://developer.celonis.com/cpm/developer/rest-api/reference/graphic-get",
-      "https://developer.celonis.com/cpm/developer/rest-api/reference/models/elementtype",
       "https://developer.celonis.com/process-intelligence-apis/subscription-api/faq",
-      "https://developer.celonis.com/cpm/developer/rest-api/reference/models/facet",
+      "https://developer.celonis.com/celonis-apis/get-started-with-celonis-apis",
+      "https://developer.celonis.com/cpm/developer/rest-api/reference/graphic-get",
+      "https://developer.celonis.com/process-intelligence-apis/subscription-api/tutorials/learning/managing-subscription",
+      "https://developer.celonis.com/cpm/developer/rest-api/reference/models/elementtype",
+      "https://developer.celonis.com/celonis-apis/auth",
       "https://developer.celonis.com/celonis-apis/auth",
       "https://developer.celonis.com/cpm/developer/rest-api/reference/models/contentmodel",
-      "https://developer.celonis.com/celonis-apis/migrating-to-oauth",
-      "https://developer.celonis.com/celonis-apis/get-started-with-celonis-apis"
+      "https://developer.celonis.com/cpm/developer/rest-api/reference/models/facet",
+      "https://developer.celonis.com/celonis-apis/migrating-to-oauth"
     ]
   },
   {
@@ -171,14 +171,14 @@
     "confidence": 0.5442072749137878,
     "retrieved_sources": [
       "https://developer.celonis.com/celonis-apis/api-reference/common-error-catalog",
-      "https://developer.celonis.com/celonis-apis/rate-limiting",
-      "https://developer.celonis.com/process-intelligence-apis/knowledge-model-api/get-started/rate-limiting",
-      "https://developer.celonis.com/celonis-apis/api-reference/common-error-catalog",
       "https://developer.celonis.com/process-intelligence-apis/subscription-api/api-reference/error-catalog",
-      "https://developer.celonis.com/process-intelligence-apis/subscription-api/get-started/rate-limiting",
+      "https://developer.celonis.com/process-intelligence-apis/knowledge-model-api/get-started/rate-limiting",
+      "https://developer.celonis.com/celonis-apis/rate-limiting",
       "https://developer.celonis.com/celonis-apis/get-started-with-celonis-apis",
-      "https://developer.celonis.com/process-intelligence-apis/subscription-api/faq",
+      "https://developer.celonis.com/process-intelligence-apis/subscription-api/get-started/rate-limiting",
+      "https://developer.celonis.com/celonis-apis/api-reference/common-error-catalog",
       "https://developer.celonis.com/cpm/developer/rest-api/how-to/error",
+      "https://developer.celonis.com/process-intelligence-apis/subscription-api/faq",
       "https://developer.celonis.com/process-intelligence-apis/knowledge-model-api/faq"
     ]
   },
@@ -194,15 +194,15 @@
     "confidence": 0.0,
     "retrieved_sources": [
       "https://developer.celonis.com/celonis-apis/req-tracing",
-      "https://developer.celonis.com/celonis-apis/auth",
-      "https://developer.celonis.com/cpm/developer/services/graphic/request/json",
-      "https://developer.celonis.com/celonis-apis/audit-log-api/overview",
-      "https://developer.celonis.com/celonis-apis/auth",
+      "https://developer.celonis.com/process-intelligence-apis/knowledge-model-api/faq",
       "https://developer.celonis.com/cpm/developer/services/graphic",
       "https://developer.celonis.com/process-intelligence-apis/subscription-api/faq",
       "https://developer.celonis.com/cpm/developer/services/graphic/request/json",
-      "https://developer.celonis.com/process-intelligence-apis/knowledge-model-api/faq",
-      "https://developer.celonis.com/cpm/developer/services/graphic/request/json"
+      "https://developer.celonis.com/cpm/developer/services/graphic/request/json",
+      "https://developer.celonis.com/cpm/developer/services/graphic/request/json",
+      "https://developer.celonis.com/celonis-apis/auth",
+      "https://developer.celonis.com/celonis-apis/auth",
+      "https://developer.celonis.com/celonis-apis/audit-log-api/overview"
     ]
   },
   {
@@ -212,7 +212,7 @@
     "question_type": "conceptual",
     "expected_answer": "The SCIM API allows for managing groups and users within the Celonis Platform. It is used to manage user identities across cloud-based applications and to integrate identity providers such as Active Directory and Okta to automatically provision and manage Celonis users and groups. All SCIM operations are scoped to a team.",
     "expected_source": "https://developer.celonis.com/celonis-apis/scim-api/overview",
-    "actual_answer": "The SCIM API is used for managing groups and users within the Celonis Platform. Specifically, it can be used to:\n1. Manage user identities across cloud-based applications such as your source identity system and your Celonis Platform team.\n2. Integrate Identity Providers/Managers such as Active Directory and Okta to the Celonis Platform in order to automatically provision and manage Celonis users and groups.\n\nThe SCIM API provides a common user schema and a method for automating the exchange of user identity information. It supports scenarios like creating, updating, and deleting user accounts and groups automatically. Importantly, all SCIM operations are scoped to a team, meaning changes to a user in one team do not affect any other memberships for that user.",
+    "actual_answer": "The SCIM API is used for managing groups and users within the Celonis Platform. Specifically, it can be used to:\n1. Manage user identities across cloud-based applications such as your source identity system and your Celonis Platform team.\n2. Integrate Identity Providers/Managers such as Active Directory and Okta to the Celonis Platform in order to automatically provision and manage Celonis users and groups.\n\nThe SCIM API provides a common user schema and a method for automating the exchange of user identity information. It supports scenarios like creating, updating, and deleting user accounts and groups automatically. All SCIM operations are scoped to a team, meaning changes to a user in one team do not affect any other memberships for that user.",
     "actual_sources": [
       "https://developer.celonis.com/celonis-apis/scim-api/overview",
       "https://developer.celonis.com/celonis-apis/scim-api/configuring-scim-api"
@@ -221,14 +221,14 @@
     "retrieved_sources": [
       "https://developer.celonis.com/celonis-apis/scim-api/overview",
       "https://developer.celonis.com/celonis-apis/scim-api/configuring-scim-api",
-      "https://developer.celonis.com/celonis-apis/scim-api/configuring-scim-api",
       "https://developer.celonis.com/celonis-apis/platform-usage-apis",
-      "https://developer.celonis.com/data-ingestion-api/standard/benefits",
-      "https://developer.celonis.com/process-intelligence-apis/agents-api/overview",
-      "https://developer.celonis.com/process-intelligence-apis/knowledge-model-api/beta-features/interoperability/odata-beta-features",
+      "https://developer.celonis.com/celonis-apis/scim-api/configuring-scim-api",
       "https://developer.celonis.com/celonis-apis/migrating-to-oauth",
       "https://developer.celonis.com/celonis-apis/auth",
-      "https://developer.celonis.com/process-intelligence-apis/overview"
+      "https://developer.celonis.com/process-intelligence-apis/agents-api/overview",
+      "https://developer.celonis.com/process-intelligence-apis/knowledge-model-api/beta-features/interoperability/odata-beta-features",
+      "https://developer.celonis.com/process-intelligence-apis/overview",
+      "https://developer.celonis.com/data-ingestion-api/standard/benefits"
     ]
   },
   {
@@ -238,7 +238,7 @@
     "question_type": "conceptual",
     "expected_answer": "Basic authentication uses static API keys or Application keys with unlimited lifetime, no rotation, and access to almost all Celonis APIs (public and private). OAuth 2.0 uses time-limited tokens and scopes (e.g. `studio`, `audit.log:read`) that restrict access following the principle of least privilege. OAuth is the recommended approach; API and Application keys are being discontinued.",
     "expected_source": "https://developer.celonis.com/celonis-apis/auth",
-    "actual_answer": "Based on the Celonis documentation, here are the key differences between static key (basic) authentication and OAuth 2.0 in Celonis APIs:\n\n**Static Keys (API Keys / Application Keys) \u2014 Being Discontinued:**\n- Use Bearer Token or AppKey authentication via the Authorization header\n- Have an **unlimited lifetime** and cannot be truly 'rotated' (must be deleted and recreated)\n- Give applications **complete access to almost all Celonis APIs** (public or private) with no way to restrict access to only certain resources\n- Not considered industry standard and are not recommended for production\n\n**OAuth 2.0 \u2014 Recommended Solution:**\n- An industry-standard framework for secure application integration\n- Uses **scopes** to manage access, meaning OAuth clients can only access APIs allowed by their configured scopes (e.g., `audit.log:read` for read-only audit log access)\n- Follows the **principle of least privilege** \u2014 clients get only the required privilege for a specific task\n- Supports two grant types:\n  - **Client Credentials**: For machine-to-machine authentication\n  - **Authorization Code**: For user-delegated access (currently in private preview)\n- Supports two authentication methods:\n  - **Client secret basic**: Credentials sent via Authorization header as base64-encoded `client_id:client_secret`\n  - **Client secret post**: Credentials sent in the HTTP request body as form parameters\n- Tokens are obtained via the token endpoint (`https://<team>.<cluster>.celonis.cloud/oauth2/token`) and included as Bearer tokens in requests\n\nCelonis strongly recommends migrating from static keys to OAuth 2.0 for production solutions.",
+    "actual_answer": "Based on the Celonis documentation, here are the key differences between static key (basic) authentication and OAuth 2.0 in Celonis APIs:\n\n**Static Keys (User API Keys / Application API Keys)**\n- Being discontinued; sunsetting milestones will be officially announced\n- Have an unlimited lifetime and cannot be 'rotated' \u2014 users must delete and recreate them to achieve key rotation\n- Give any application using them complete access to almost all Celonis APIs (public or private)\n- No way to restrict access to only certain resources\n- Used via `Authorization: Bearer <token>` (User API Key) or `Authorization: AppKey <key>` (Application API Key) headers\n\n**OAuth 2.0 (Recommended)**\n- A well-established industry standard, more secure and flexible\n- Uses **scopes** to manage access to resources \u2014 OAuth clients can only access APIs allowed by the scopes they are configured to use\n- Follows the security principle of **least privilege**: a client only gets the required privilege to perform a specific task\n- Supports token renewal/rotation via refresh tokens\n- Supports two grant types: **Client Credentials** (machine-to-machine) and **Authorization Code** (user-delegated, currently in private preview)\n- Supports two authentication methods: **Client secret basic** (credentials sent via Base64-encoded Authorization header) and **Client secret post** (credentials sent in the HTTP request body)\n- Tokens are short-lived (e.g., `expires_in: 899` seconds as shown in the token response)\n- Used via `Authorization: Bearer <access_token>` header after obtaining a token from the `/oauth2/token` endpoint\n\nIn summary, OAuth 2.0 is more secure due to scoped access, token expiration, and rotation support, while static keys are broad, long-lived, and harder to manage securely.",
     "actual_sources": [
       "https://developer.celonis.com/celonis-apis/auth",
       "https://developer.celonis.com/celonis-apis/migrating-to-oauth"
@@ -247,13 +247,13 @@
     "retrieved_sources": [
       "https://developer.celonis.com/celonis-apis/auth",
       "https://developer.celonis.com/celonis-apis/auth",
-      "https://developer.celonis.com/celonis-apis/migrating-to-oauth",
-      "https://developer.celonis.com/celonis-apis/migrating-to-oauth",
+      "https://developer.celonis.com/celonis-apis/auth",
       "https://developer.celonis.com/celonis-apis/oauth-authentication",
       "https://developer.celonis.com/data-ingestion-api/getting-started",
       "https://developer.celonis.com/celonis-apis/auth",
+      "https://developer.celonis.com/celonis-apis/migrating-to-oauth",
       "https://developer.celonis.com/celonis-apis/auth",
-      "https://developer.celonis.com/celonis-apis/auth",
+      "https://developer.celonis.com/celonis-apis/migrating-to-oauth",
       "https://developer.celonis.com/celonis-apis/migrating-to-oauth"
     ]
   },
@@ -264,24 +264,24 @@
     "question_type": "conceptual",
     "expected_answer": "Celonis APIs use page-based pagination on endpoints that return lists. It is controlled by two parameters: `page` (the page number, starting from 0) and `pageSize` (items per page, default 50). The maximum `page` value depends on the total number of records and the configured `pageSize`.",
     "expected_source": "https://developer.celonis.com/celonis-apis/pagination",
-    "actual_answer": "Celonis APIs use page-based pagination for all endpoints that return results in the form of lists. It is configured via two parameters:\n\n1. **`page`**: The page number to be retrieved, starting from `0`. The maximum page number is the page that contains the last record based on the `pageSize`.\n\n2. **`pageSize`**: The number of items per page to be returned. The default value is `50`, meaning the maximum number of items retrievable in each call is 50 records.\n\nFor the Knowledge Model API specifically, there is an additional constraint: the maximum number of records that can be retrieved through the `/data` endpoint is **5,000 records**, so the maximum page number is the one that contains the 5,000th record based on the `pageSize`.\n\nIf an invalid format is sent as part of the `page` or `pageSize` parameters, the API will return a `400` error with the error code `GENERAL_PARAMETER_MISSMATCH`.",
+    "actual_answer": "Celonis APIs use page-based pagination for all endpoints that return results in the form of lists. It is configured via two parameters:\n\n1. **`page`**: The page number to be retrieved, starting from `0`. The maximum page number is the page that contains the last record based on the `pageSize` and varies based on the number of retrieved records.\n\n2. **`pageSize`**: The number of items per page to be returned. The default value is `50`, meaning the maximum number of items that can be retrieved in each call is 50.\n\nFor the Knowledge Model API specifically, there is an additional constraint: the maximum number of records that can be retrieved through the `/data` endpoint is 5,000 records, so the maximum page number is the one that contains the 5,000th record based on the `pageSize`.\n\nNote that sending an invalid format for either the `page` or `pageSize` parameters will result in a `400` error with the error code `GENERAL_PARAMETER_MISSMATCH`.",
     "actual_sources": [
       "https://developer.celonis.com/celonis-apis/pagination",
       "https://developer.celonis.com/process-intelligence-apis/knowledge-model-api/get-started/pagination",
       "https://developer.celonis.com/celonis-apis/api-reference/common-error-catalog"
     ],
-    "confidence": 0.5706692337989807,
+    "confidence": 0.6914464831352234,
     "retrieved_sources": [
-      "https://developer.celonis.com/celonis-apis/get-started-with-celonis-apis",
       "https://developer.celonis.com/celonis-apis/pagination",
-      "https://developer.celonis.com/celonis-apis/migrating-to-oauth",
       "https://developer.celonis.com/celonis-apis/get-started-with-celonis-apis",
-      "https://developer.celonis.com/process-intelligence-apis/knowledge-model-api/get-started/pagination",
-      "https://developer.celonis.com/celonis-apis/using-data-push-api",
+      "https://developer.celonis.com/celonis-apis/migrating-to-oauth",
       "https://developer.celonis.com/data-ingestion-api/getting-started",
+      "https://developer.celonis.com/celonis-apis/get-started-with-celonis-apis",
+      "https://developer.celonis.com/celonis-apis/using-data-push-api",
       "https://developer.celonis.com/cpm/developer/rest-api/overview/permalinks-api",
-      "https://developer.celonis.com/data-ingestion-api/standard/benefits",
-      "https://developer.celonis.com/celonis-apis/api-reference/common-error-catalog"
+      "https://developer.celonis.com/celonis-apis/api-reference/common-error-catalog",
+      "https://developer.celonis.com/process-intelligence-apis/knowledge-model-api/get-started/pagination",
+      "https://developer.celonis.com/data-ingestion-api/standard/benefits"
     ]
   },
   {
@@ -291,23 +291,23 @@
     "question_type": "conceptual",
     "expected_answer": "The Data Push API uses micro-batching: instead of one huge transfer or inserting records individually, it creates, executes, and monitors many smaller transfers. The flow has four stages: (1) Create data push \u2014 define the target data pool, connection, and table (optionally schema and primary keys for delta loads); (2) Push chunk \u2014 push the data in chunks using Parquet (preferred) or CSV; (3) Submit push job \u2014 asynchronous; (4) List push jobs \u2014 view and monitor job status. Each chunk is limited to 1 GB but there is no limit on the number of chunks or combined size.",
     "expected_source": "https://developer.celonis.com/celonis-apis/using-data-push-api",
-    "actual_answer": "The Data Push API transfers data into the Celonis Platform using a method called micro-batching. Instead of either inserting huge chunks of data all at once or inserting records individually, data is structured into smaller 'micro-batches'. The process works as follows:\n\n1. **Create a Data Push Job**: This defines which Data Pool, Data Connection, and target table the data should be pushed into. You can also define a table schema and primary keys for delta loading.\n2. **Push Chunks**: Data is pushed to the platform in chunks using either Parquet (preferred) or CSV file formats. There is a 1 GB data limit per chunk, but no limit on the number of chunks or their combined size.\n3. **Submit the Push Job**: The job is submitted asynchronously by calling the execute Data Push Job endpoint.\n4. **Monitor the Job**: You can view and monitor the status of your push jobs by listing the push jobs.\n\nOnce the data is available in the platform, you can transform, analyze, and work with it just as you would with a Celonis-provided extractor.",
+    "actual_answer": "The Data Push API transfers data into the Celonis Platform using a technique called **micro-batching**. Instead of inserting huge chunks of data all at once or inserting records one by one, data is structured into smaller 'micro-batches'. The process works as follows:\n\n1. **Create a Data Push Job**: This defines which Data Pool, Data Connection, and target table the data should be pushed into. You can also define a table schema and primary keys for delta loading.\n2. **Push Chunks**: Data is sent to the platform in chunks using either Parquet (preferred) or CSV file format.\n3. **Submit the Push Job**: The job is submitted asynchronously via the execute Data Push Job endpoint.\n4. **Monitor the Job**: You can view and monitor the status of push jobs by listing them.\n\nOnce the data is available in the platform, it can be transformed, analyzed, and worked with just like data from a Celonis-provided extractor.\n\n**API Limits:**\n- There is a **1 GB data limit per chunk**, but no limit on the number of chunks or their combined size.\n- Rate limits apply: **10 requests/second** and **250 requests/hour** (interval starts at the full hour, UTC-based).",
     "actual_sources": [
       "https://developer.celonis.com/celonis-apis/using-data-push-api",
       "https://developer.celonis.com/data-ingestion-api/getting-started"
     ],
-    "confidence": 0.7276806831359863,
+    "confidence": 0.6255984306335449,
     "retrieved_sources": [
-      "https://developer.celonis.com/celonis-apis/using-data-push-api",
-      "https://developer.celonis.com/data-ingestion-api/getting-started",
-      "https://developer.celonis.com/celonis-apis/using-data-push-api",
-      "https://developer.celonis.com/celonis-apis/get-started-with-celonis-apis",
-      "https://developer.celonis.com/data-ingestion-api/standard/benefits",
       "https://developer.celonis.com/data-ingestion-api/standard/pushing/data",
+      "https://developer.celonis.com/celonis-apis/using-data-push-api",
       "https://developer.celonis.com/data-ingestion-api/getting-started",
-      "https://developer.celonis.com/data-ingestion-api/getting-started",
+      "https://developer.celonis.com/celonis-apis/using-data-push-api",
       "https://developer.celonis.com/data-ingestion-api/standard/using/standard/data/ingestion",
-      "https://developer.celonis.com/celonis-apis/migrating-to-oauth"
+      "https://developer.celonis.com/data-ingestion-api/getting-started",
+      "https://developer.celonis.com/data-ingestion-api/getting-started",
+      "https://developer.celonis.com/data-ingestion-api/standard/benefits",
+      "https://developer.celonis.com/celonis-apis/migrating-to-oauth",
+      "https://developer.celonis.com/celonis-apis/get-started-with-celonis-apis"
     ]
   },
   {
@@ -317,24 +317,24 @@
     "question_type": "conceptual",
     "expected_answer": "Three options: (1) OAuth client (recommended) \u2014 created in Admin & Settings \u2192 Applications, requires the `integration.data-pools:data_push` or `integration.data-pools` scope plus Data Push API permission on the target data pool; (2) API key \u2014 created in a user profile, mirrors that user's permissions, displayed only at creation time; (3) Application key \u2014 granted permissions explicitly after creation (no permissions by default).",
     "expected_source": "https://developer.celonis.com/celonis-apis/using-data-push-api",
-    "actual_answer": "The Data Push API supports the following authentication options:\n\n1. **OAuth client (recommended):** Create an OAuth client in Admin & Settings - Applications. The OAuth client needs to have the scope 'integration.data-pools:data_push' or 'integration.data-pools' to use the Data Push API. In addition, the client needs to be granted Data Push API permission on the corresponding data pool.\n\n2. **API key:** These are created within an individual user profile in your Celonis Platform, with the key's permissions mirroring those of the user who created them. For security reasons, an API key is only displayed at the time it is created. To authenticate, include it in the HTTP Authorization header as: `Authorization: Bearer <YOUR_KEY>`\n\n3. **Application key:** Creating application keys enables you to give access and permissions to any applications or requests you create. Once created, an application key must be granted the necessary permissions within your Celonis Platform (as by default, application keys are created without permissions). To authenticate, include it in the HTTP Authorization header as: `Authorization: AppKey <YOUR_KEY>`\n\nNote: Static keys (API keys and Application keys) are not the recommended industry standard and are to be discontinued. OAuth 2.0 is the recommended solution as it follows the security principle of least privilege.",
+    "actual_answer": "The following authentication options are available for the Data Push API:\n\n1. **OAuth client (recommended):** Create an OAuth client in Admin & Settings - Applications. The OAuth client needs to have the scope 'integration.data-pools:data_push' or 'integration.data-pools' to use the Data Push API. In addition, the client needs to be granted Data Push API permission on the corresponding data pool.\n\n2. **API key:** These are created within an individual user profile in your Celonis Platform, with the key's permissions mirroring those of the user who created them. For security reasons, an API key is only displayed at the time it is created, so you must create a new key if you no longer have access to any you create. Authentication is done using Bearer Token Authentication: `Authorization: Bearer <YOUR_KEY>`.\n\n3. **Application key:** Creating application keys enables you to give access and permissions to any applications or requests you create. Once created, an application key must be granted the necessary permissions within your Celonis Platform (as by default, application keys are created without permissions). Authentication is done using: `Authorization: AppKey <YOUR_KEY>`.\n\nNote: OAuth 2.0 is the recommended solution as it follows the security principle of least privilege, while static keys (API keys and Application keys) are not recommended as they are planned to be discontinued.",
     "actual_sources": [
       "https://developer.celonis.com/celonis-apis/using-data-push-api",
-      "https://developer.celonis.com/celonis-apis/auth",
-      "https://developer.celonis.com/data-ingestion-api/getting-started"
+      "https://developer.celonis.com/data-ingestion-api/getting-started",
+      "https://developer.celonis.com/celonis-apis/auth"
     ],
-    "confidence": 0.5545753240585327,
+    "confidence": 0.0,
     "retrieved_sources": [
-      "https://developer.celonis.com/data-ingestion-api/getting-started",
-      "https://developer.celonis.com/data-ingestion-api/getting-started",
       "https://developer.celonis.com/celonis-apis/using-data-push-api",
+      "https://developer.celonis.com/data-ingestion-api/getting-started",
+      "https://developer.celonis.com/data-ingestion-api/getting-started",
+      "https://developer.celonis.com/data-ingestion-api/getting-started",
       "https://developer.celonis.com/celonis-apis/auth",
-      "https://developer.celonis.com/celonis-apis/auth",
+      "https://developer.celonis.com/celonis-apis/using-data-push-api",
       "https://developer.celonis.com/data-ingestion-api/standard/integration/options",
-      "https://developer.celonis.com/celonis-apis/platform-api/overview",
-      "https://developer.celonis.com/celonis-apis/using-data-push-api",
-      "https://developer.celonis.com/data-ingestion-api/getting-started",
-      "https://developer.celonis.com/process-intelligence-apis/subscription-api/get-started/getting-started"
+      "https://developer.celonis.com/process-intelligence-apis/subscription-api/get-started/getting-started",
+      "https://developer.celonis.com/celonis-apis/auth",
+      "https://developer.celonis.com/celonis-apis/platform-api/overview"
     ]
   },
   {
@@ -344,23 +344,23 @@
     "question_type": "multi_hop",
     "expected_answer": "API keys and Application keys are not industry-standard. They have unlimited lifetime, cannot be rotated (users must delete and recreate them), and \u2014 especially for API keys \u2014 they grant any application complete access to almost all Celonis APIs with no way to restrict access to specific resources. OAuth 2.0 is the industry standard, uses scopes (e.g. `studio`, `audit.log:read`) so clients can only access APIs allowed by their scopes, and combined with Celonis permissions enforces the principle of least privilege. Celonis is in the process of moving away from long-term keys toward OAuth.",
     "expected_source": "https://developer.celonis.com/celonis-apis/auth",
-    "actual_answer": "Celonis is migrating away from API keys and Application keys toward OAuth 2.0 for several reasons outlined in their documentation:\n\n1. **Not industry standard**: API keys and Application keys are not the industry standard and are therefore not recommended.\n\n2. **Unlimited lifetime / no rotation**: Both key types have an unlimited lifetime and cannot be 'rotated.' Users must delete and recreate them to achieve the equivalent of key rotation, which is a cumbersome process.\n\n3. **Overly broad access**: API keys give any application that uses them complete access to almost all Celonis APIs (public or private), with no way to restrict access to only certain resources.\n\n4. **OAuth 2.0 advantages**: OAuth 2.0 is a well-established industry standard that uses scopes to manage access to resources, meaning OAuth clients can only access APIs allowed by the scopes they are configured to use. This follows the security principle of least privilege, so an OAuth client only gets the required privilege to perform a certain task and no additional permissions.",
+    "actual_answer": "Celonis is migrating away from API keys and Application keys toward OAuth 2.0 for several reasons:\n\n1. **Industry standard**: OAuth 2.0 is a well-established industry standard, whereas API keys and Application keys are not the industry standard and are therefore not recommended.\n\n2. **Unlimited lifetime / no rotation**: Both API keys and Application keys have an unlimited lifetime and cannot be 'rotated'. Users must delete and recreate them to achieve the equivalent of key rotation, which is a cumbersome process.\n\n3. **Overly broad access**: API keys in particular give any application that uses them complete access to almost all Celonis APIs (public or private), with no way to restrict access to only certain resources.\n\n4. **Scope-based access control**: OAuth 2.0 uses scopes to manage access to resources, meaning OAuth clients can only access APIs allowed by the scopes they are configured to use. This follows the security principle of least privilege, so an OAuth client only gets the required privilege to perform a certain task and nothing more.\n\n5. **Easier and more secure integration**: OAuth 2.0 makes it easier to integrate customer-managed applications with Celonis in a more secure and flexible way.",
     "actual_sources": [
       "https://developer.celonis.com/celonis-apis/auth",
-      "https://developer.celonis.com/celonis-apis/migrating-to-oauth"
+      "https://developer.celonis.com/data-ingestion-api/getting-started"
     ],
     "confidence": 0.779996931552887,
     "retrieved_sources": [
       "https://developer.celonis.com/celonis-apis/migrating-to-oauth",
+      "https://developer.celonis.com/celonis-apis/migrating-to-oauth",
+      "https://developer.celonis.com/celonis-apis/migrating-to-oauth",
       "https://developer.celonis.com/celonis-apis/auth",
-      "https://developer.celonis.com/celonis-apis/auth",
-      "https://developer.celonis.com/data-ingestion-api/getting-started",
       "https://developer.celonis.com/celonis-apis/connecting-to-celonis-platform",
-      "https://developer.celonis.com/celonis-apis/migrating-to-oauth",
-      "https://developer.celonis.com/celonis-apis/oauth-authentication",
-      "https://developer.celonis.com/celonis-apis/migrating-to-oauth",
+      "https://developer.celonis.com/data-ingestion-api/getting-started",
       "https://developer.celonis.com/celonis-apis/auth",
-      "https://developer.celonis.com/celonis-apis/using-data-push-api"
+      "https://developer.celonis.com/celonis-apis/auth",
+      "https://developer.celonis.com/celonis-apis/using-data-push-api",
+      "https://developer.celonis.com/celonis-apis/oauth-authentication"
     ]
   },
   {
@@ -370,24 +370,24 @@
     "question_type": "conceptual",
     "expected_answer": "A 401 (Unauthorized) is returned when the request does not provide a Bearer token, or when the Authorization header is empty or has an invalid format (it must start with `Bearer` or `AppKey`, case insensitive). A 403 (Forbidden) is returned when the caller is authenticated but lacks permission to access the specific resource (e.g. error code `ADMIN_ACCESS_ERROR`), or when the API itself is disabled.",
     "expected_source": "https://developer.celonis.com/celonis-apis/api-reference/common-error-catalog",
-    "actual_answer": "Based on the Celonis API documentation:\n\n**401 Unauthorized** is returned in these cases:\n- The request does not provide a Bearer token at all.\n- The Bearer token is passed but is empty or follows an invalid format (e.g., the Authorization header doesn't start with 'Bearer' or 'AppKey').\n- In the context of Celonis Process Management API, it means authorization failed \u2014 the token may be incorrect or the HTTP header contains incorrect data.\n\n**403 Forbidden** is returned in these cases:\n- The user does not have permission to access a specific resource (e.g., a Knowledge Model), returning error code `ADMIN_ACCESS_ERROR`.\n- The API is disabled (returns an empty body).\n- For the Subscription API specifically, a 403 is returned when the operation is only allowed for the subscription owner or administrators (`SUBSCRIPTION_FORBIDDEN`).\n\nIn summary: a **401** means authentication failed (no valid token was provided), while a **403** means authentication succeeded but the authenticated user/client lacks the necessary permissions to access the requested resource.",
+    "actual_answer": "Based on the Celonis API documentation:\n\n**401 Unauthorized** is returned in authentication-related failures, specifically:\n- When the request does not provide a Bearer token at all.\n- When the Bearer token is passed but is empty or follows an invalid format (e.g., the Authorization header doesn't start with 'Bearer' or 'AppKey').\n\nIn short, a 401 means the request could not be authenticated \u2014 the credentials are missing or malformed.\n\n**403 Forbidden** is returned in authorization-related failures, specifically:\n- When the user does not have permission to access a specific resource (e.g., a Knowledge Model), returning error code `ADMIN_ACCESS_ERROR`.\n- When the API itself is disabled (returns an empty body).\n- In the Subscription API, when the operation is only allowed to the subscription owner or administrators, returning error code `SUBSCRIPTION_FORBIDDEN`.\n\nIn short, a 403 means the request was authenticated (identity is known), but the caller lacks the necessary permissions to perform the requested action.",
     "actual_sources": [
       "https://developer.celonis.com/celonis-apis/api-reference/common-error-catalog",
-      "https://developer.celonis.com/cpm/developer/rest-api/how-to/error",
-      "https://developer.celonis.com/process-intelligence-apis/subscription-api/api-reference/error-catalog"
+      "https://developer.celonis.com/process-intelligence-apis/subscription-api/api-reference/error-catalog",
+      "https://developer.celonis.com/cpm/developer/rest-api/how-to/error"
     ],
-    "confidence": 0.5692368745803833,
+    "confidence": 0.5148485898971558,
     "retrieved_sources": [
-      "https://developer.celonis.com/celonis-apis/migrating-to-oauth",
       "https://developer.celonis.com/celonis-apis/api-reference/common-error-catalog",
-      "https://developer.celonis.com/celonis-apis/auth",
       "https://developer.celonis.com/cpm/developer/rest-api/how-to/error",
-      "https://developer.celonis.com/celonis-apis/auth",
+      "https://developer.celonis.com/process-intelligence-apis/subscription-api/api-reference/error-catalog",
+      "https://developer.celonis.com/celonis-apis/migrating-to-oauth",
       "https://developer.celonis.com/process-intelligence-apis/subscription-api/tutorials/learning/managing-subscription",
       "https://developer.celonis.com/data-ingestion-api/standard/standard/overview",
+      "https://developer.celonis.com/celonis-apis/get-started-with-celonis-apis",
       "https://developer.celonis.com/celonis-apis/auth",
-      "https://developer.celonis.com/process-intelligence-apis/subscription-api/api-reference/error-catalog",
-      "https://developer.celonis.com/celonis-apis/get-started-with-celonis-apis"
+      "https://developer.celonis.com/celonis-apis/auth",
+      "https://developer.celonis.com/celonis-apis/auth"
     ]
   },
   {
@@ -397,24 +397,24 @@
     "question_type": "multi_hop",
     "expected_answer": "Audit Log API v2 uses cursor-based pagination, not the standard page/pageSize scheme. Call GET /log/api/external/v2/audit; the first request omits the `pageToken` parameter, and subsequent requests must use the returned `nextPageToken` as the new `pageToken`. Stop fetching when `nextPageToken` is absent or empty. For authentication, use an OAuth 2.0 token with scope `audit.log` (preferred), passed as `Authorization: Bearer TOKEN`. Application keys and API keys are also supported but OAuth with a narrow scope follows the principle of least privilege.",
     "expected_source": "https://developer.celonis.com/celonis-apis/audit-log-api/overview",
-    "actual_answer": "To paginate through Audit Log API v2 results, you must implement a cursor-based loop:\n\n1. Make your first request to GET /log/api/external/v2/audit **without** the `pageToken` parameter.\n2. Each response will include a `nextPageToken`. Use this value as the `pageToken` parameter in your next request.\n3. Continue this loop until `nextPageToken` is absent or empty \u2014 that signals you have retrieved all available data.\n\nThe required OAuth 2.0 scope for the Audit Log API is **`audit.log`** (or **`audit.log:read`** for read-only access). This scope must be configured on your OAuth client, and the client must also have the appropriate Celonis platform permissions (Audit logs - Manage, Use API) assigned in Admin & Settings.",
+    "actual_answer": "To paginate through Audit Log API v2 results, you must implement a cursor-based loop:\n\n1. Make your first request to GET /log/api/external/v2/audit **without** the `pageToken` parameter.\n2. Each response will include a `nextPageToken`. Use this value as the `pageToken` parameter in your subsequent requests.\n3. Continue this loop until `nextPageToken` is absent or empty \u2014 that signals you have retrieved all available data.\n\nThe required OAuth scope for the Audit Log API is **`audit.log:read`** (or `audit.log` when passing an OAuth 2.0 Bearer token). This scope must be configured on your OAuth client, and the client must also have the appropriate Celonis permission (Audit logs - Manage, Use API) assigned in Admin & Settings.",
     "actual_sources": [
       "https://developer.celonis.com/celonis-apis/audit-log-api/overview",
-      "https://developer.celonis.com/celonis-apis/connecting-to-celonis-platform",
-      "https://developer.celonis.com/celonis-apis/migrating-to-oauth"
+      "https://developer.celonis.com/celonis-apis/migrating-to-oauth",
+      "https://developer.celonis.com/celonis-apis/connecting-to-celonis-platform"
     ],
     "confidence": 0.4298309087753296,
     "retrieved_sources": [
       "https://developer.celonis.com/celonis-apis/audit-log-api/overview",
-      "https://developer.celonis.com/celonis-apis/migrating-to-oauth",
       "https://developer.celonis.com/data-ingestion-api/getting-started",
+      "https://developer.celonis.com/celonis-apis/migrating-to-oauth",
+      "https://developer.celonis.com/celonis-apis/migrating-to-oauth",
+      "https://developer.celonis.com/celonis-apis/connecting-to-celonis-platform",
+      "https://developer.celonis.com/celonis-apis/connecting-to-celonis-platform",
       "https://developer.celonis.com/celonis-apis/audit-log-api/overview",
-      "https://developer.celonis.com/celonis-apis/connecting-to-celonis-platform",
-      "https://developer.celonis.com/celonis-apis/connecting-to-celonis-platform",
-      "https://developer.celonis.com/process-intelligence-apis/knowledge-model-api/get-started/pagination",
       "https://developer.celonis.com/celonis-apis/migrating-to-oauth",
       "https://developer.celonis.com/celonis-apis/migrating-to-oauth",
-      "https://developer.celonis.com/celonis-apis/migrating-to-oauth"
+      "https://developer.celonis.com/process-intelligence-apis/knowledge-model-api/get-started/pagination"
     ]
   },
   {
@@ -424,7 +424,7 @@
     "question_type": "multi_hop",
     "expected_answer": "Three steps. (1) Enable SCIM: go to Admin & Settings > Settings and switch on the 'Enable SCIM' toggle. SCIM can only be enabled if Just-in-time (JIT) user provisioning is disabled. (2) Authorize your identity system: add an OAuth client in Admin & Settings > Applications with the `user-provisioning.scim` scope, then grant it SCIM permissions in Admin & Settings > Permissions > User Provisioning. (3) Configure your identity provider with the credentials from step 2 and the SCIM endpoint `https://[Team-Name].[Realm].celonis.cloud/scim/v2/`. For Azure specifically, the Token Endpoint must include the scope as a query parameter: `https://[TEAM].[REALM].celonis.cloud/oauth2/token?scope=user-provisioning.scim`. Common identity providers used with SCIM include Active Directory and Okta.",
     "expected_source": "https://developer.celonis.com/celonis-apis/scim-api/configuring-scim-api",
-    "actual_answer": "To enable SCIM provisioning and wire it up to an identity provider, follow these steps:\n\n**Prerequisites:**\n1. Just-in-time (JIT) user provisioning must be **disabled** \u2014 SCIM can only be enabled when JIT is turned off.\n\n**Enabling SCIM:**\n1. Go to **Admin & Settings > Settings** and switch on the **Enable SCIM** toggle.\n\n**Setting up OAuth Authorization:**\n2. Add an OAuth client to authorize your identity system's access to the SCIM API:\n   - Go to **Admin & Settings > Applications** and register a new OAuth client application.\n   - When defining scopes, select **`user-provisioning.scim`**.\n3. Grant your OAuth client SCIM permissions by going to **Admin & Settings > Permissions > User Provisioning**.\n\n**Wiring up to your Identity Provider:**\n4. In your identity provider's settings, use the OAuth credentials created above and the following SCIM endpoint URL:\n   `https://[Team-Name].[Realm].celonis.cloud/scim/v2/`\n\n**Special note for Azure (OAuth):**\nIf you are using Azure with SCIM via OAuth, you must enter your OAuth scope in the **Token Endpoint** field in Azure. The field should look like:\n`https://[TEAM].[REALM].celonis.cloud/oauth2/token?scope=user-provisioning.scim`\n\n**Authentication method:**\nThe SCIM API uses OAuth 2.0 token authentication. Pass the token in the HTTP Authorization header as:\n`Authorization: Bearer TOKEN`",
+    "actual_answer": "To enable SCIM provisioning in Celonis and connect it to an identity provider, follow these steps:\n\n**Prerequisites / Requirements:**\n1. **JIT must be disabled:** SCIM can only be enabled if Just-in-time (JIT) user provisioning is disabled. (See Configuring SAML JIT single sign-on.)\n\n**Steps to Enable and Configure SCIM:**\n\n1. **Enable SCIM:** Go to *Admin & Settings > Settings* and switch on the **Enable SCIM** toggle.\n\n2. **Create an OAuth Client:** Go to *Admin & Settings > Applications* and register a new OAuth client application. When defining scopes, select **\"user-provisioning.scim\"**.\n\n3. **Grant SCIM Permissions:** Go to *Admin & Settings > Permissions > User Provisioning* and give your OAuth client SCIM permissions.\n\n4. **Configure your Identity Provider:** In your identity provider's settings, use the OAuth credentials created above and the following SCIM base URL:\n   `https://[Team-Name].[Realm].celonis.cloud/scim/v2/`\n\n**Special Note for Azure (OAuth):**\nIf you are using Azure with SCIM via OAuth, you must enter your OAuth scope in the Token Endpoint field in Azure. The Token Endpoint field should look like:\n`https://[TEAM].[REALM].celonis.cloud/oauth2/token?scope=user-provisioning.scim`\n\n**Authentication:**\nThe SCIM API uses OAuth 2.0 token authentication with the scope `user-provisioning.scim`, passed as an HTTP header:\n`Authorization: Bearer TOKEN`",
     "actual_sources": [
       "https://developer.celonis.com/celonis-apis/scim-api/configuring-scim-api",
       "https://developer.celonis.com/celonis-apis/scim-api/overview"
@@ -434,13 +434,13 @@
       "https://developer.celonis.com/celonis-apis/scim-api/configuring-scim-api",
       "https://developer.celonis.com/celonis-apis/scim-api/overview",
       "https://developer.celonis.com/celonis-apis/scim-api/configuring-scim-api",
-      "https://developer.celonis.com/process-intelligence-apis/knowledge-model-api/get-started/getting-started",
-      "https://developer.celonis.com/process-intelligence-apis/agents-api/get-started/getting-started",
-      "https://developer.celonis.com/process-intelligence-apis/subscription-api/get-started/getting-started",
       "https://developer.celonis.com/celonis-apis/auth",
+      "https://developer.celonis.com/process-intelligence-apis/agents-api/get-started/getting-started",
       "https://developer.celonis.com/celonis-apis/migrating-to-oauth",
-      "https://developer.celonis.com/celonis-apis/oauth-authentication",
-      "https://developer.celonis.com/process-intelligence-apis/subscription-api/faq"
+      "https://developer.celonis.com/process-intelligence-apis/knowledge-model-api/get-started/getting-started",
+      "https://developer.celonis.com/process-intelligence-apis/subscription-api/get-started/getting-started",
+      "https://developer.celonis.com/process-intelligence-apis/subscription-api/faq",
+      "https://developer.celonis.com/celonis-apis/oauth-authentication"
     ]
   },
   {
@@ -450,7 +450,7 @@
     "question_type": "multi_hop",
     "expected_answer": "When creating the data push, define the table schema and the primary keys for delta loading \u2014 this is done at the 'Create data push' stage along with the target data pool, data connection, and table. For pushing the chunks themselves, the Data Push API accepts either Parquet (preferred) or CSV. Chunking applies the same way for delta and full loads: each chunk is limited to 1 GB, there is no limit on the number of chunks or their combined size, and all chunks are submitted via the same asynchronous push job. The submit-and-monitor flow (Submit push job \u2192 List push jobs) is identical regardless of load type.",
     "expected_source": "https://developer.celonis.com/celonis-apis/using-data-push-api",
-    "actual_answer": "Based on the provided documentation, here is what is stated about incremental updates via the Data Push API:\n\n**File Format:**\n- You should use **Parquet (preferred)** or CSV files when pushing chunks. Parquet is explicitly noted as the preferred format.\n\n**Chunking:**\n- Data is structured into 'micro-batches' (chunks). Each chunk has a **1 GB data limit**. A single push job can contain multiple chunks and has no overall data limit.\n- Files are processed using a first in, first out (FIFO) method.\n\n**Primary Keys and Delta Loads:**\n- When creating a Data Push job, you can define a **table schema and primary keys** to enable delta loading (incremental updates).\n- For the Standard Data Ingestion API specifically, it **always performs delta loads**, and you must define primary keys to ensure proper updates and avoid duplicates.\n- An **Age column** can also be configured: if a record with a value smaller than the existing age column value is pushed, the update won't be applied; equal or larger values will be applied.\n\n**Important caveat on schema evolution and primary keys:**\n- Automatic schema evolution (e.g., auto-extending VARCHAR lengths) does **not** apply to Primary Key columns. If a pushed record exceeds the defined length of a Primary Key column, it will **fail** rather than auto-adjust.\n\nNote: The Data Push API is not recommended for new implementations; Celonis recommends using the Data Ingestion API instead.",
+    "actual_answer": "Based on the provided documentation:\n\n**File Format:**\nFor the Data Push API, you should use **Parquet (preferred)** or CSV files when pushing chunks. For the Standard Data Ingestion API specifically, only **uncompressed Parquet files** are supported \u2014 alternative formats must be converted to Parquet before ingestion.\n\n**Chunking and Primary Keys for Incremental (Delta) Updates:**\n\n1. **Delta loads:** The Standard Data Ingestion API always performs delta loads. You must define primary keys to ensure proper updates and avoid duplicates.\n\n2. **How primary keys work with delta loads:** When you configure a data connection, you define a **Primary Key** (to uniquely identify records) and an **Age Column** (to guarantee the most recent version of a record is stored). If a record arrives with an age column value *smaller* than the existing value, the update won't be applied. Values equal to or larger than the existing value will be applied.\n\n3. **Chunking interaction:** The Data Push API uses micro-batching \u2014 you push data in multiple smaller chunks within a single push job. Each chunk is a Parquet or CSV file. There is a **1 GB limit per chunk**, but no overall limit for a push job containing multiple chunks. The primary key you define applies across all chunks to ensure correct deduplication and delta handling.\n\n4. **Important limitation on Primary Keys and schema evolution:** Automatic schema evolution does **not** apply to Primary Key columns. For example, if a Primary Key column is defined as VARCHAR(80) and a record exceeding 80 characters is pushed, the ingestion will **fail** rather than auto-extend the column.",
     "actual_sources": [
       "https://developer.celonis.com/data-ingestion-api/getting-started",
       "https://developer.celonis.com/celonis-apis/using-data-push-api",
@@ -458,15 +458,15 @@
       "https://developer.celonis.com/data-ingestion-api/standard/using/standard/data/ingestion",
       "https://developer.celonis.com/data-ingestion-api/standard/benefits"
     ],
-    "confidence": 0.5955290198326111,
+    "confidence": 0.45480644702911377,
     "retrieved_sources": [
-      "https://developer.celonis.com/data-ingestion-api/standard/benefits",
       "https://developer.celonis.com/data-ingestion-api/standard/using/standard/data/ingestion",
       "https://developer.celonis.com/data-ingestion-api/standard/using/standard/data/ingestion",
-      "https://developer.celonis.com/data-ingestion-api/getting-started",
       "https://developer.celonis.com/celonis-apis/using-data-push-api",
-      "https://developer.celonis.com/data-ingestion-api/standard/pushing/data",
+      "https://developer.celonis.com/data-ingestion-api/getting-started",
       "https://developer.celonis.com/data-ingestion-api/standard/benefits",
+      "https://developer.celonis.com/data-ingestion-api/standard/benefits",
+      "https://developer.celonis.com/data-ingestion-api/standard/pushing/data",
       "https://developer.celonis.com/celonis-apis/process-data-model-api",
       "https://developer.celonis.com/data-ingestion-api/sucessful-push",
       "https://developer.celonis.com/data-ingestion-api/standard/standard/overview"
@@ -479,7 +479,7 @@
     "question_type": "multi_hop",
     "expected_answer": "The standard error response is a JSON object with `title`, `status`, `detail`, and `errorCode` fields. For a 403 (Forbidden) permission error, the response looks like `{\"title\": \"Access Denied.\", \"status\": 403, \"detail\": \"Access is denied\", \"errorCode\": \"ADMIN_ACCESS_ERROR\"}` \u2014 returned when the caller is authenticated but lacks permission to access a specific resource such as a Knowledge Model. A 429 (Too Many Requests) is returned when the rate limit is exceeded; it includes an `x-ratelimit-reset` response header indicating how many seconds to wait before retrying. The two cases are distinguished by status code and by the presence of the `x-ratelimit-reset` header on 429 responses.",
     "expected_source": "https://developer.celonis.com/celonis-apis/api-reference/common-error-catalog",
-    "actual_answer": "Based on the Celonis API documentation, the standard error response shape is a JSON object with the following fields:\n- `title`: A short description of the error\n- `status`: The HTTP status code (integer)\n- `detail`: A more detailed explanation of the error\n- `errorCode`: A machine-readable error code string\n\nExample of the standard shape:\n```\n{\n  \"title\": \"...\",\n  \"status\": <HTTP status code>,\n  \"detail\": \"...\",\n  \"errorCode\": \"...\"\n}\n```\n\n**429 Rate Limit Error** (`LIMIT_RATE_EXCEEDED`):\n- Returned when a client exceeds the allowed number of requests in a time window.\n- Example response:\n  ```json\n  {\n    \"title\": \"Rate limit exceeded\",\n    \"status\": 429,\n    \"detail\": \"Rate limit for INTELLIGENCE_API_RATE_LIMIT is exceeded. Please try again at 06:10:41 UTC.\",\n    \"errorCode\": \"LIMIT_RATE_EXCEEDED\"\n  }\n  ```\n- Additionally, the response includes HTTP headers: `x-ratelimit-reset` (seconds to wait), `x-ratelimit-limit` (max requests in window), and `x-ratelimit-remaining` (remaining requests).\n\n**403 Permission Error** (`ADMIN_ACCESS_ERROR`):\n- Returned when the user lacks permission to access a specific resource.\n- Example response:\n  ```json\n  {\n    \"title\": \"Access Denied.\",\n    \"status\": 403,\n    \"detail\": \"Access is denied\",\n    \"errorCode\": \"ADMIN_ACCESS_ERROR\"\n  }\n  ```\n- Note: If the API itself is disabled, a 403 is returned with an **empty body** (no JSON payload).\n\nThe key difference is that a 429 is a **temporary throttling issue** (the client has made too many requests and should retry after a wait period), while a 403 is an **authorization/permission issue** (the client does not have the rights to access the resource, regardless of request volume).",
+    "actual_answer": "Based on the Celonis API documentation, the standard error response shape is a JSON object with the following fields:\n- `title`: A short description of the error\n- `status`: The HTTP status code (integer)\n- `detail`: A more detailed explanation of the error\n- `errorCode`: A Celonis-specific error code string\n\nExample of the general shape:\n```json\n{\n  \"title\": \"...\",\n  \"status\": <HTTP status code>,\n  \"detail\": \"...\",\n  \"errorCode\": \"...\"\n}\n```\n\n**429 Rate Limit Error** (`LIMIT_RATE_EXCEEDED`):\n- Returned when a client exceeds the allowed number of requests in a time window.\n- Example response:\n  ```json\n  {\n    \"title\": \"Rate limit exceeded\",\n    \"status\": 429,\n    \"detail\": \"Rate limit for INTELLIGENCE_API_RATE_LIMIT is exceeded. Please try again at 06:10:41 UTC.\",\n    \"errorCode\": \"LIMIT_RATE_EXCEEDED\"\n  }\n  ```\n- Additionally, the response includes HTTP headers: `x-ratelimit-reset` (seconds to wait), `x-ratelimit-limit` (max requests in window), and `x-ratelimit-remaining` (remaining requests).\n\n**403 Permission Error** (`ADMIN_ACCESS_ERROR`):\n- Returned when the authenticated user lacks permission to access a specific resource.\n- Example response:\n  ```json\n  {\n    \"title\": \"Access Denied.\",\n    \"status\": 403,\n    \"detail\": \"Access is denied\",\n    \"errorCode\": \"ADMIN_ACCESS_ERROR\"\n  }\n  ```\n- No special headers are associated with this error.\n\nIn summary, both follow the same JSON shape, but a 429 signals a temporary throttling condition (with retry guidance via headers), while a 403 signals a persistent authorization/permission denial with no retry headers.",
     "actual_sources": [
       "https://developer.celonis.com/celonis-apis/api-reference/common-error-catalog",
       "https://developer.celonis.com/celonis-apis/rate-limiting",
@@ -488,14 +488,14 @@
     "confidence": 0.6191351413726807,
     "retrieved_sources": [
       "https://developer.celonis.com/celonis-apis/api-reference/common-error-catalog",
-      "https://developer.celonis.com/celonis-apis/api-reference/common-error-catalog",
-      "https://developer.celonis.com/celonis-apis/rate-limiting",
       "https://developer.celonis.com/celonis-apis/get-started-with-celonis-apis",
       "https://developer.celonis.com/process-intelligence-apis/knowledge-model-api/get-started/rate-limiting",
+      "https://developer.celonis.com/celonis-apis/rate-limiting",
+      "https://developer.celonis.com/process-intelligence-apis/agents-api/api-reference/error-catalog",
+      "https://developer.celonis.com/celonis-apis/api-reference/common-error-catalog",
+      "https://developer.celonis.com/celonis-apis/migrating-to-oauth",
       "https://developer.celonis.com/cpm/developer/rest-api/how-to/error",
       "https://developer.celonis.com/celonis-apis/get-started-with-celonis-apis",
-      "https://developer.celonis.com/celonis-apis/migrating-to-oauth",
-      "https://developer.celonis.com/process-intelligence-apis/agents-api/api-reference/error-catalog",
       "https://developer.celonis.com/celonis-apis/using-data-push-api"
     ]
   },
@@ -506,22 +506,22 @@
     "question_type": "conceptual",
     "expected_answer": "The Process Data Model API is a RESTful API for reloading data models so the latest source-system data is available in Celonis. It supports GET requests to retrieve information (such as the list of tables via `GET /integration/api/v1/data-pools/{poolId}/data-models/{dataModelId}/tables` and last-load info via `.../last-load`) and POST requests to trigger loads \u2014 a complete reload via `POST .../load` or a partial reload of selected tables via `POST .../load/partial-sync` with a JSON array of table IDs in the body. To use it you need both the data pool ID and the data model ID, both visible in the platform URL.",
     "expected_source": "https://developer.celonis.com/celonis-apis/process-data-model-api",
-    "actual_answer": "The Process Data Model API allows you to completely or partially reload your data models, ensuring that the latest data from your source system is available. It is a RESTful API that supports GET requests to retrieve information and POST requests to trigger data model loads. You can trigger a complete data model load using a POST request, or perform a partial reload to update only a subset of tables.",
+    "actual_answer": "The Process Data Model API allows you to completely or partially reload your data models, ensuring that the latest data from your source system is available. It is a RESTful API that allows you to run GET requests to retrieve information and POST requests to trigger data model loads. Specifically, it supports:\n\n1. **Complete data model reload**: Trigger a full data model load using a POST request: `POST /integration/api/v1/data-pools/{poolId}/data-models/{dataModelId}/load`\n2. **Partial data model reload**: Update only a subset of tables.\n\nTo use the API, you need both a data pool ID and a data model ID, and you can authenticate using OAuth client (recommended), application key, or API key.",
     "actual_sources": [
       "https://developer.celonis.com/celonis-apis/process-data-model-api"
     ],
-    "confidence": 0.4645128846168518,
+    "confidence": 0.45827579498291016,
     "retrieved_sources": [
-      "https://developer.celonis.com/process-intelligence-apis/knowledge-model-api/beta-features/interoperability/odata-beta-features",
-      "https://developer.celonis.com/process-intelligence-apis/overview",
-      "https://developer.celonis.com/process-intelligence-apis/knowledge-model-api/beta-features/ai/semantic",
       "https://developer.celonis.com/celonis-apis/process-data-model-api",
+      "https://developer.celonis.com/process-intelligence-apis/overview",
       "https://developer.celonis.com/process-intelligence-apis/knowledge-model-api/overview",
-      "https://developer.celonis.com/process-intelligence-apis/agents-api/overview",
-      "https://developer.celonis.com/data-ingestion-api/standard/benefits",
-      "https://developer.celonis.com/process-intelligence-apis/knowledge-model-api/beta-features/interoperability/odata-beta-features",
       "https://developer.celonis.com/celonis-apis/migrating-to-oauth",
-      "https://developer.celonis.com/process-intelligence-apis/knowledge-model-api/faq"
+      "https://developer.celonis.com/process-intelligence-apis/agents-api/overview",
+      "https://developer.celonis.com/process-intelligence-apis/knowledge-model-api/faq",
+      "https://developer.celonis.com/process-intelligence-apis/knowledge-model-api/beta-features/interoperability/odata-beta-features",
+      "https://developer.celonis.com/process-intelligence-apis/knowledge-model-api/beta-features/ai/semantic",
+      "https://developer.celonis.com/data-ingestion-api/standard/benefits",
+      "https://developer.celonis.com/process-intelligence-apis/knowledge-model-api/beta-features/interoperability/odata-beta-features"
     ]
   },
   {
@@ -531,22 +531,22 @@
     "question_type": "multi_hop",
     "expected_answer": "Trigger a data job with `POST /integration/api/v2/data-pools/{poolId}/data-jobs/{jobId}/execute?mode={mode}` where `mode` is `FULL` (extract all tables) or `DELTA` (only tables changed since the last extraction). Authenticate via Bearer with an OAuth access token (preferred) \u2014 the OAuth client needs the `integration.data-pools` scope plus both viewing and managing permissions on the data pool \u2014 or via an Application key (`Authorization: AppKey ...`). If the caller is authenticated but does not have permission on the target data pool, the API returns 403 (Forbidden) following the standard error shape, e.g. `{\"title\": \"Access Denied.\", \"status\": 403, \"detail\": \"Access is denied\", \"errorCode\": \"ADMIN_ACCESS_ERROR\"}`. A missing or malformed Authorization header returns 401 instead.",
     "expected_source": "https://developer.celonis.com/celonis-apis/data-job-execution-api",
-    "actual_answer": "To trigger a data job execution via the API, send a POST request to the following endpoint:\n\nPOST /integration/api/v2/data-pools/{poolId}/data-jobs/{jobId}/execute?mode={mode}\n\nWhere:\n- {poolId} is your Data Pool ID (retrievable from the URL of the data job in the UI)\n- {jobId} is your Data Job ID (also from the URL)\n- {mode} is either FULL (all tables extracted) or DELTA (only changed tables since last extraction)\n\nYou must include your authentication token in the Authorization header. Example using Python:\n\n```python\nimport requests\ntenant = 'xyz'\nrealm = 'xyz'  # e.g. eu-1, us-1, eu-2\napi_key = 'xyz'\npool_id = 'xyz'\ndata_job_id = 'xyz'\ndata_job_mode = 'DELTA'\n\nurl = \"https://{}.{}.celonis.cloud/integration/api/v2/data-pools/{}/data-jobs/{}/execute?mode={}\".format(\n    tenant, realm, pool_id, data_job_id, data_job_mode)\n\nrequests.post(url, headers={'authorization': \"Bearer {}\".format(api_key)})\n```\n\nIf using OAuth, the scope 'integration.data-pools' must be configured, and the client must have both viewing and managing permissions on the target data pool.\n\nRegarding the specific error code to expect when your token lacks permission on the target data pool: the provided documentation does not explicitly state which error code (e.g., 401 or 403) is returned in that scenario. The documentation only mentions a '401 unauthorized' error in the context of OAuth troubleshooting generally, but does not detail the exact error response for insufficient data pool permissions on the data job execution endpoint specifically.",
+    "actual_answer": "To trigger a data job execution via the API, make a POST request to the following endpoint:\n\nPOST /integration/api/v2/data-pools/{poolId}/data-jobs/{jobId}/execute?mode={mode}\n\nWhere:\n- {poolId} is your Data Pool ID (retrievable from the URL of the data pool in the Celonis UI)\n- {jobId} is your Data Job ID (also retrievable from the URL)\n- {mode} is either FULL (all tables are extracted) or DELTA (only tables changed since the last extraction)\n\nAuthentication is done via a Bearer token or AppKey in the Authorization header. For example, using Python:\n\n```python\nimport requests\ntenant = 'xyz'\nrealm = 'xyz'\napi_key = 'xyz'\npool_id = 'xyz'\ndata_job_id = 'xyz'\ndata_job_mode = 'DELTA'\nurl = \"https://{}.{}.celonis.cloud/integration/api/v2/data-pools/{}/data-jobs/{}/execute?mode={}\".format(tenant, realm, pool_id, data_job_id, data_job_mode)\nrequests.post(url, headers={'authorization': \"Bearer {}\".format(api_key)})\n```\n\nIf using an OAuth client, the scope 'integration.data-pools' must be configured, and the client must have both viewing and managing permissions on the target data pool.\n\nRegarding the specific error code to expect when your token lacks permission on the target data pool: the provided documentation does not explicitly state which HTTP error code is returned in that scenario. It only mentions that a '401 unauthorized' error can occur due to missing permissions (referenced briefly in the troubleshooting section of the OAuth migration guide), but does not provide detailed specifics about this error in the context of data job execution.",
     "actual_sources": [
       "https://developer.celonis.com/celonis-apis/data-job-execution-api",
       "https://developer.celonis.com/celonis-apis/auth",
       "https://developer.celonis.com/celonis-apis/migrating-to-oauth"
     ],
-    "confidence": 0.55,
+    "confidence": 0.6,
     "retrieved_sources": [
       "https://developer.celonis.com/celonis-apis/data-job-execution-api",
-      "https://developer.celonis.com/data-ingestion-api/getting-started",
-      "https://developer.celonis.com/data-ingestion-api/getting-started",
-      "https://developer.celonis.com/celonis-apis/data-job-execution-api",
       "https://developer.celonis.com/celonis-apis/migrating-to-oauth",
-      "https://developer.celonis.com/data-ingestion-api/sucessful-push",
+      "https://developer.celonis.com/celonis-apis/data-job-execution-api",
       "https://developer.celonis.com/data-ingestion-api/getting-started",
       "https://developer.celonis.com/celonis-apis/auth",
+      "https://developer.celonis.com/data-ingestion-api/getting-started",
+      "https://developer.celonis.com/data-ingestion-api/getting-started",
+      "https://developer.celonis.com/data-ingestion-api/sucessful-push",
       "https://developer.celonis.com/celonis-apis/permissions-api/overview",
       "https://developer.celonis.com/data-ingestion-api/python-example-1"
     ]
@@ -558,25 +558,25 @@
     "question_type": "multi_hop",
     "expected_answer": "In Admin & Settings > Applications, click Add New Application and choose OAuth Client. Use authentication method 'Client secret post' and select the scopes for the APIs you need: `audit.log:read` (Audit Log API), `authorization.permissions:read` (Permissions API), `platform-adoption.tracking-events:read` (Studio/Platform Adoption API), `team.login-history:read` (Login History API), and `user-provisoning.scim` (SCIM API). Click Create and copy the client ID and client secret. Then open the application and click Admin & Settings to assign the matching service permissions (Audit logs, Login history, Platform adoption, Service permissions, Users \u2014 each as Manage/Use API/Import as relevant) and Save. The client now has both the OAuth scopes and the Celonis permissions needed to call those APIs; you can then request an access token and test it in Postman or via curl.",
     "expected_source": "https://developer.celonis.com/celonis-apis/connecting-to-celonis-platform",
-    "actual_answer": "Here is a step-by-step guide to wire up an OAuth client for the Audit Log, Login History, Permissions, Platform Adoption, and SCIM APIs:\n\n**1. Create an OAuth Client**\n- Go to Admin & Settings > Applications.\n- Click 'Add New Application' and select 'OAuth Client'.\n- Set Authentication method to: **Client secret post**.\n- Select the required scopes:\n  - `audit.log:read` \u2014 Audit Log API\n  - `team.login-history:read` \u2014 Login History API\n  - `authorization.permissions:read` \u2014 Permissions API\n  - `platform-adoption.tracking-events:read` \u2014 Platform Adoption API\n  - `user-provisioning.scim` \u2014 SCIM API\n- Click **Create**, then copy the **Client ID** and **Client Secret** for later use.\n\n**2. Grant API Permissions to the Application**\n- On the Applications page, open the application you just created.\n- In the 'Add new' section, click the **Admin & Settings** button.\n- Assign the following permissions as needed:\n  - Audit logs \u2014 Manage, Use API\n  - Login history \u2014 Manage, Use API\n  - Platform adoption \u2014 Manage, Use API\n  - Service permissions \u2014 Manage, Use API\n  - Users \u2014 Import, Manage, Use API\n- Click **Save**.\n\n**3. For SCIM specifically**\n- Go to Admin & Settings > Settings and enable the **Enable SCIM** toggle (note: SCIM can only be enabled if Just-in-time (JIT) user provisioning is disabled).\n- Go to Admin & Settings > Permissions > User Provisioning and grant your OAuth client SCIM permissions.\n- In your identity provider, use the credentials from the OAuth client and the URL: `https://[Team-Name].[Realm].celonis.cloud/scim/v2/`\n- If using Azure with SCIM, enter the Token Endpoint as: `https://[TEAM].[REALM].celonis.cloud/oauth2/token?scope=user-provisioning.scim`\n\n**4. Request an OAuth Access Token**\n- Call the token endpoint: `https://[teamname].[realm].celonis.cloud/oauth2/token`\n- Use the Client ID and Client Secret, and include the relevant scope(s) as a request body parameter.\n- A successful response looks like:\n  ```json\n  {\n    \"access_token\": \"randomizedAccessToken\",\n    \"scope\": \"scope1 scope2 scopeN\",\n    \"token_type\": \"Bearer\",\n    \"expires_in\": 899\n  }\n  ```\n\n**5. Authenticate API Calls**\n- Pass the token in the HTTP Authorization header:\n  `Authorization: Bearer <access_token>`\n\n**6. Test Your Credentials**\n- **Postman/curl**: Follow the token request steps above and verify you receive a valid access token.\n- **Swagger UI**: Navigate to `https://[teamname].[realm].celonis.cloud/swagger-ui/index.html?configUrl=/log/v3/api-docs/swagger-config`, click Authorize, enter `Bearer <client_id>`, then use Try it out / Execute to test endpoints.\n\n**Important Note:** When configuring OAuth in an extractor (e.g., Extractor Builder), the `scope` parameter must be added as an **Additional Request Body parameter**, NOT in the Additional Request Header field.",
+    "actual_answer": "Here is a step-by-step guide to wire up an OAuth client for the Audit Log, Login History, Permissions, Platform Adoption, and SCIM APIs:\n\n**1. Create an OAuth Client**\n- Go to Admin & Settings and select 'Applications'.\n- Click 'Add New Application' and select 'OAuth Client'.\n- Set the Authentication method to: **Client secret post**.\n\n**2. Select the Required Scopes**\nWhen creating the OAuth client, select the following scopes based on which APIs you need:\n- `audit.log:read` \u2014 Audit Log API\n- `authorization.permissions:read` \u2014 Permissions API\n- `platform-adoption.tracking-events:read` \u2014 Platform Adoption API\n- `team.login-history:read` \u2014 Login History API\n- `user-provisioning.scim` \u2014 SCIM API\n\n- Click **Create**, then copy the **Client ID** and **Client Secret** for later use.\n\n**3. Assign API Permissions to the Application**\n- On the Applications page, open the application you just created.\n- In the 'Add new' section, click the **Admin & Settings** button.\n- Assign the following permissions as needed:\n  - Audit logs \u2014 Manage, Use API\n  - Login history \u2014 Manage, Use API\n  - Platform adoption \u2014 Manage, Use API\n  - Service permissions \u2014 Manage, Use API\n  - Users \u2014 Import, Manage, Use API\n- Click **Save**.\n\n**4. Request an OAuth Access Token**\n- Call the token endpoint: `https://[TEAM].[REALM].celonis.cloud/oauth2/token`\n- Use the Client ID and Client Secret with the grant type **Client Credentials**.\n- Include the required scopes as an additional request body parameter with key `scope` (values separated by spaces).\n- A successful response will look like:\n```json\n{\n  \"access_token\": \"randomizedAccessToken\",\n  \"scope\": \"scope1 scope2 scopeN\",\n  \"token_type\": \"Bearer\",\n  \"expires_in\": 899\n}\n```\n\n**5. Authenticate API Calls**\n- Pass the token in the HTTP Authorization header:\n  `Authorization: Bearer <access_token>`\n\n**6. (Optional) Test Your Credentials**\n- Use **Postman** or **curl** to test the token request.\n- Use **Swagger UI** at `https://[teamname].[realm].celonis.cloud/swagger-ui/index.html?configUrl=/log/v3/api-docs/swagger-config` to test individual API endpoints interactively.\n\n**Note for SCIM with Azure/Microsoft EntraID:** Enter your token endpoint including the scope in the Azure Token Endpoint field:\n`https://[TEAM].[REALM].celonis.cloud/oauth2/token?scope=user-provisioning.scim`",
     "actual_sources": [
       "https://developer.celonis.com/celonis-apis/connecting-to-celonis-platform",
       "https://developer.celonis.com/celonis-apis/migrating-to-oauth",
-      "https://developer.celonis.com/celonis-apis/scim-api/configuring-scim-api",
-      "https://developer.celonis.com/celonis-apis/permissions-api/overview"
+      "https://developer.celonis.com/celonis-apis/permissions-api/overview",
+      "https://developer.celonis.com/celonis-apis/scim-api/configuring-scim-api"
     ],
-    "confidence": 0.5800936222076416,
+    "confidence": 0.5650040507316589,
     "retrieved_sources": [
+      "https://developer.celonis.com/celonis-apis/connecting-to-celonis-platform",
+      "https://developer.celonis.com/celonis-apis/connecting-to-celonis-platform",
       "https://developer.celonis.com/celonis-apis/migrating-to-oauth",
-      "https://developer.celonis.com/celonis-apis/connecting-to-celonis-platform",
-      "https://developer.celonis.com/celonis-apis/connecting-to-celonis-platform",
+      "https://developer.celonis.com/celonis-apis/migrating-to-oauth",
       "https://developer.celonis.com/celonis-apis/migrating-to-oauth",
       "https://developer.celonis.com/data-ingestion-api/getting-started",
+      "https://developer.celonis.com/celonis-apis/permissions-api/overview",
       "https://developer.celonis.com/celonis-apis/platform-usage-apis",
       "https://developer.celonis.com/celonis-apis/migrating-to-oauth",
-      "https://developer.celonis.com/celonis-apis/permissions-api/overview",
-      "https://developer.celonis.com/celonis-apis/scim-api/configuring-scim-api",
-      "https://developer.celonis.com/celonis-apis/migrating-to-oauth"
+      "https://developer.celonis.com/celonis-apis/scim-api/configuring-scim-api"
     ]
   },
   {
@@ -586,19 +586,19 @@
     "question_type": "multi_hop",
     "expected_answer": "Platform Adoption API v2 uses cursor-based pagination, not the standard `page`/`pageSize` scheme. Call `GET /platform-adoption/api/external/v2/adoption-tracking-events/{STUDIO_ASSET}` on your team subdomain; omit the `pageToken` parameter on the first request, then on each subsequent request send the `nextPageToken` returned by the previous response as the new `pageToken`. Stop fetching when `nextPageToken` is absent or empty. Authenticate with an OAuth 2.0 Bearer token that has the `platform-adoption.tracking-events` scope (preferred), or with an Application/API key. Version 1 of the API still exists but is deprecated; new integrations should use v2.",
     "expected_source": "https://developer.celonis.com/celonis-apis/platform-api/overview",
-    "actual_answer": "To page through results from the Platform Adoption API v2, you must implement a cursor loop as follows:\n\n1. Make your first request to the endpoint `GET /platform-adoption/api/external/v2/adoption-tracking-events/{STUDIO_ASSET}` **without** the `pageToken` parameter.\n2. Each response will include a `nextPageToken` value. For each subsequent request, pass the returned `nextPageToken` as the `pageToken` parameter in your next request.\n3. Continue this loop until the `nextPageToken` in the response is absent or empty \u2014 that signals you have retrieved all available data.",
+    "actual_answer": "To page through results from the Platform Adoption API v2, you must implement a cursor loop as follows:\n\n1. **First request**: Call the endpoint `GET /platform-adoption/api/external/v2/adoption-tracking-events/{STUDIO_ASSET}` and **omit the `pageToken` parameter**.\n2. **Subsequent requests**: Use the `nextPageToken` value returned in the previous response as the `pageToken` parameter in your next request.\n3. **Stop condition**: Continue fetching pages until the `nextPageToken` is absent or empty \u2014 that signals you have retrieved all available data.",
     "actual_sources": [
       "https://developer.celonis.com/celonis-apis/platform-api/overview"
     ],
     "confidence": 0.47041261196136475,
     "retrieved_sources": [
       "https://developer.celonis.com/celonis-apis/platform-api/overview",
-      "https://developer.celonis.com/celonis-apis/platform-usage-apis",
       "https://developer.celonis.com/celonis-apis/platform-api/overview",
-      "https://developer.celonis.com/process-intelligence-apis/knowledge-model-api/get-started/getting-started",
-      "https://developer.celonis.com/process-intelligence-apis/subscription-api/get-started/getting-started",
-      "https://developer.celonis.com/celonis-apis/permissions-api/overview",
       "https://developer.celonis.com/celonis-apis/migrating-to-oauth",
+      "https://developer.celonis.com/celonis-apis/platform-usage-apis",
+      "https://developer.celonis.com/celonis-apis/permissions-api/overview",
+      "https://developer.celonis.com/process-intelligence-apis/subscription-api/get-started/getting-started",
+      "https://developer.celonis.com/process-intelligence-apis/knowledge-model-api/get-started/getting-started",
       "https://developer.celonis.com/process-intelligence-apis/knowledge-model-api/faq",
       "https://developer.celonis.com/celonis-apis/migrating-to-oauth",
       "https://developer.celonis.com/celonis-apis/migrating-to-oauth"
@@ -611,20 +611,20 @@
     "question_type": "factual",
     "expected_answer": "The Permissions API accepts an OAuth 2.0 access token with the scope `authorization.permissions`, sent as `Authorization: Bearer TOKEN` (preferred). Application keys (`Authorization: AppKey APPLICATION_KEY`) and API keys (`Authorization: Bearer API_KEY`) are also supported. The base URL is `https://[your-team].celonis.cloud/api/authorization/external/permissions`, where `[your-team]` is the name of your Celonis instance.",
     "expected_source": "https://developer.celonis.com/celonis-apis/permissions-api/overview",
-    "actual_answer": "The Permissions API requires the OAuth scope `authorization.permissions` (passed as a Bearer token in the Authorization header). The base URL for the Permissions API is: `https://<your-team>.celonis.cloud/api/authorization/external/permissions`, where you replace `your-team` with the name of your Celonis instance.",
+    "actual_answer": "The Permissions API requires the OAuth scope `authorization.permissions`, passed in an HTTP header like this: `Authorization: Bearer TOKEN`. The base URL for the Permissions API is: `https://<your-team>.celonis.cloud/api/authorization/external/permissions` (replace `your-team` with the name of your Celonis instance).",
     "actual_sources": [
       "https://developer.celonis.com/celonis-apis/permissions-api/overview"
     ],
-    "confidence": 0.5346056818962097,
+    "confidence": 0.3261570930480957,
     "retrieved_sources": [
+      "https://developer.celonis.com/celonis-apis/migrating-to-oauth",
+      "https://developer.celonis.com/celonis-apis/auth",
       "https://developer.celonis.com/data-ingestion-api/getting-started",
-      "https://developer.celonis.com/celonis-apis/auth",
-      "https://developer.celonis.com/celonis-apis/auth",
       "https://developer.celonis.com/celonis-apis/migrating-to-oauth",
       "https://developer.celonis.com/celonis-apis/connecting-to-celonis-platform",
-      "https://developer.celonis.com/celonis-apis/migrating-to-oauth",
-      "https://developer.celonis.com/celonis-apis/migrating-to-oauth",
       "https://developer.celonis.com/celonis-apis/permissions-api/overview",
+      "https://developer.celonis.com/celonis-apis/auth",
+      "https://developer.celonis.com/celonis-apis/migrating-to-oauth",
       "https://developer.celonis.com/celonis-apis/auth",
       "https://developer.celonis.com/celonis-apis/platform-api/overview"
     ]
@@ -636,24 +636,23 @@
     "question_type": "conceptual",
     "expected_answer": "Use the Team API to query team data that already exists in Celonis \u2014 for example listing members via `https://[your-team].celonis.cloud/api/external/members` or pulling authentication events via `https://[your-team].celonis.cloud/api/external/authentication-events`. It is authenticated with an OAuth 2.0 token whose scope is `team.user-group-info` (for members) or `team.login-history` (for login history), and all operations are scoped to a Celonis Platform team. Use the SCIM API when an external identity provider (Active Directory, Okta, etc.) should be the source of truth for users and groups \u2014 it is the standards-based provisioning interface for automatically creating, updating, and deprovisioning Celonis users and groups from the IdP. In short: Team API for reading team membership and login history out of Celonis, SCIM API for pushing user/group lifecycle changes into Celonis from an IdP.",
     "expected_source": "https://developer.celonis.com/celonis-apis/team-api/overview",
-    "actual_answer": "Based on the provided documentation, the two APIs serve distinct purposes:\n\n**SCIM API** is designed for **managing (writing) users and groups** \u2014 it supports creating, updating, and deleting user accounts and groups automatically. Key use cases include:\n- Managing user identities across cloud-based applications (e.g., your source identity system and Celonis Platform).\n- Integrating Identity Providers such as Active Directory or Okta to automatically provision and manage Celonis users and groups.\n\n**Team APIs** are designed for **querying (reading) team data** \u2014 they are read-oriented and do not manage or provision users. Key use cases include:\n- Querying and exporting a list of all members currently assigned to a Celonis Platform team.\n- Connecting external monitoring tools (e.g., SIEM tools) to capture and monitor platform login events.\n- Viewing and analyzing login history to monitor team usage or identify potential security issues.\n\n**In summary:** Use the **SCIM API** when you need to provision, update, or delete users and groups (write operations). Use the **Team API** when you need to query or monitor existing team members and login history (read operations).",
+    "actual_answer": "Based on the provided documentation, the two APIs serve distinct purposes:\n\n**SCIM API** is designed for **managing/provisioning users and groups** \u2014 it supports creating, updating, and deleting user accounts and groups. Use it when you need to:\n- Manage user identities across cloud-based applications (e.g., syncing your identity system with Celonis).\n- Integrate Identity Providers such as Active Directory or Okta to automatically provision and manage Celonis users and groups.\n- Control user attributes like roles, display names, and invitation emails.\n\n**Team APIs** are designed for **querying/reading team data** \u2014 they are read-oriented. Use them when you need to:\n- Query and export a list of all members currently assigned to a Celonis Platform team.\n- View and analyze login history with an external tool to monitor team usage or identify potential security issues.\n- Connect external monitoring tools (e.g., SIEM tools) to capture and monitor platform login events.\n\nIn summary: use the **SCIM API** for provisioning and lifecycle management of users/groups, and use the **Team API** for monitoring and querying existing membership and login activity. Note that all operations in both APIs are scoped to a single team.",
     "actual_sources": [
       "https://developer.celonis.com/celonis-apis/scim-api/overview",
-      "https://developer.celonis.com/celonis-apis/scim-api/configuring-scim-api",
       "https://developer.celonis.com/celonis-apis/team-api/overview"
     ],
     "confidence": 0.6540449261665344,
     "retrieved_sources": [
       "https://developer.celonis.com/celonis-apis/scim-api/overview",
       "https://developer.celonis.com/celonis-apis/scim-api/configuring-scim-api",
-      "https://developer.celonis.com/celonis-apis/scim-api/configuring-scim-api",
       "https://developer.celonis.com/celonis-apis/platform-usage-apis",
-      "https://developer.celonis.com/celonis-apis/connecting-to-celonis-platform",
       "https://developer.celonis.com/celonis-apis/migrating-to-oauth",
+      "https://developer.celonis.com/celonis-apis/scim-api/configuring-scim-api",
+      "https://developer.celonis.com/celonis-apis/connecting-to-celonis-platform",
+      "https://developer.celonis.com/celonis-apis/team-api/overview",
       "https://developer.celonis.com/process-intelligence-apis/knowledge-model-api/get-started/getting-started",
       "https://developer.celonis.com/data-ingestion-api/getting-started",
-      "https://developer.celonis.com/celonis-apis/migrating-to-oauth",
-      "https://developer.celonis.com/celonis-apis/team-api/overview"
+      "https://developer.celonis.com/celonis-apis/migrating-to-oauth"
     ]
   },
   {
@@ -669,14 +668,14 @@
     "retrieved_sources": [
       "https://developer.celonis.com/process-intelligence-apis/knowledge-model-api/get-started/getting-started",
       "https://developer.celonis.com/process-intelligence-apis/knowledge-model-api/get-started/getting-started",
-      "https://developer.celonis.com/process-intelligence-apis/subscription-api/api-reference/error-catalog",
-      "https://developer.celonis.com/process-intelligence-apis/knowledge-model-api/faq",
-      "https://developer.celonis.com/process-intelligence-apis/subscription-api/api-reference/error-catalog",
-      "https://developer.celonis.com/process-intelligence-apis/knowledge-model-api/tutorials/learning/exploring-schema",
-      "https://developer.celonis.com/cpm/developer/rest-api/reference/related-get",
       "https://developer.celonis.com/process-intelligence-apis/knowledge-model-api/api-reference/try-it",
+      "https://developer.celonis.com/process-intelligence-apis/knowledge-model-api/faq",
       "https://developer.celonis.com/process-intelligence-apis/subscription-api/api-reference/try-it",
-      "https://developer.celonis.com/process-intelligence-apis/knowledge-model-api/features/filtering-odata-typed"
+      "https://developer.celonis.com/process-intelligence-apis/knowledge-model-api/tutorials/learning/exploring-schema",
+      "https://developer.celonis.com/process-intelligence-apis/knowledge-model-api/features/filtering-odata-typed",
+      "https://developer.celonis.com/process-intelligence-apis/subscription-api/api-reference/error-catalog",
+      "https://developer.celonis.com/process-intelligence-apis/subscription-api/api-reference/error-catalog",
+      "https://developer.celonis.com/cpm/developer/rest-api/reference/related-get"
     ]
   },
   {
@@ -690,16 +689,16 @@
     "actual_sources": [],
     "confidence": 0.0,
     "retrieved_sources": [
-      "https://developer.celonis.com/process-intelligence-apis/subscription-api/get-started/rate-limiting",
       "https://developer.celonis.com/process-intelligence-apis/knowledge-model-api/get-started/rate-limiting",
       "https://developer.celonis.com/celonis-apis/rate-limiting",
-      "https://developer.celonis.com/process-intelligence-apis/agents-api/terms",
+      "https://developer.celonis.com/process-intelligence-apis/subscription-api/get-started/rate-limiting",
       "https://developer.celonis.com/process-intelligence-apis/knowledge-model-api/terms",
-      "https://developer.celonis.com/process-intelligence-apis/subscription-api/terms",
+      "https://developer.celonis.com/process-intelligence-apis/agents-api/terms",
       "https://developer.celonis.com/celonis-apis/auth",
-      "https://developer.celonis.com/celonis-apis/get-started-with-celonis-apis",
       "https://developer.celonis.com/celonis-apis/api-reference/common-error-catalog",
-      "https://developer.celonis.com/celonis-apis/pagination"
+      "https://developer.celonis.com/celonis-apis/pagination",
+      "https://developer.celonis.com/process-intelligence-apis/subscription-api/terms",
+      "https://developer.celonis.com/celonis-apis/get-started-with-celonis-apis"
     ]
   },
   {
@@ -714,15 +713,15 @@
     "confidence": 0.0,
     "retrieved_sources": [
       "https://developer.celonis.com/celonis-apis/auth",
-      "https://developer.celonis.com/celonis-apis/auth",
-      "https://developer.celonis.com/celonis-apis/auth",
       "https://developer.celonis.com/data-ingestion-api/getting-started",
+      "https://developer.celonis.com/celonis-apis/auth",
       "https://developer.celonis.com/celonis-apis/migrating-to-oauth",
+      "https://developer.celonis.com/celonis-apis/connecting-to-celonis-platform",
+      "https://developer.celonis.com/celonis-apis/auth",
       "https://developer.celonis.com/celonis-apis/oauth-authentication",
       "https://developer.celonis.com/celonis-apis/auth",
       "https://developer.celonis.com/celonis-apis/migrating-to-oauth",
-      "https://developer.celonis.com/celonis-apis/scim-api/configuring-scim-api",
-      "https://developer.celonis.com/celonis-apis/connecting-to-celonis-platform"
+      "https://developer.celonis.com/celonis-apis/scim-api/configuring-scim-api"
     ]
   },
   {
@@ -732,7 +731,7 @@
     "question_type": "factual",
     "expected_answer": "Send the credential on the standard HTTP `Authorization` header. The recommended approach is OAuth 2.0: create an OAuth client in Admin & Settings > Applications with the scopes you need, obtain an access token, then send `Authorization: Bearer <access_token>` on each request. Legacy User API keys are also sent as `Authorization: Bearer <key>` and Application keys as `Authorization: AppKey <key>`, but both static-key options are being discontinued in favor of OAuth because they have unlimited lifetime, cannot be rotated, and grant broad access. Credentials sent in the URL or request body are ignored.",
     "expected_source": "https://developer.celonis.com/celonis-apis/auth",
-    "actual_answer": "To authenticate a single request against a Celonis API, you need to include your credentials in the HTTP `Authorization` header. Celonis supports the following authentication methods:\n\n1. **OAuth 2.0 (Recommended):** First, obtain an access token by calling the token endpoint:\n   ```\n   POST https://<team>.<cluster>.celonis.cloud/oauth2/token\n   ```\n   Then include the token in your request header:\n   ```\n   Authorization: Bearer <access_token>\n   ```\n\n2. **User API Key (Bearer Token):**\n   ```\n   Authorization: Bearer <YOUR_API_KEY>\n   ```\n\n3. **Application API Key (AppKey):**\n   ```\n   Authorization: AppKey <YOUR_APP_KEY>\n   ```\n\n**Important notes:**\n- Credentials must be sent in the `Authorization` **header** only. Credentials sent in the URL or body of the request will be ignored.\n- User API Keys and Application API Keys are marked as **to be discontinued**; OAuth 2.0 is the recommended approach for production solutions.\n- For OAuth 2.0, the client must also have the appropriate **scopes** and **permissions** configured for the resources you want to access.",
+    "actual_answer": "You can authenticate a single request against a Celonis API using one of the following methods:\n\n1. **OAuth 2.0 (Recommended):** First, obtain an access token by calling the token endpoint:\n   ```\n   POST https://<team>.<cluster>.celonis.cloud/oauth2/token\n   ```\n   Then include the token in the Authorization header of your request:\n   ```\n   Authorization: Bearer <access_token>\n   ```\n\n2. **User API Key (Bearer Token):** Include your User API Key in the Authorization header:\n   ```\n   Authorization: Bearer <YOUR_KEY>\n   ```\n\n3. **Application API Key (AppKey):** Include your Application Key in the Authorization header:\n   ```\n   Authorization: AppKey <YOUR_KEY>\n   ```\n\n**Important notes:**\n- Credentials must be sent in the **Authorization header** of the HTTP request. Credentials sent in the URL or body of the request will be ignored.\n- Both User API Keys and Application API Keys are marked as **to be discontinued**. For production solutions, Celonis strongly recommends using **OAuth 2.0** instead of static keys.\n- OAuth 2.0 uses scopes to manage access (e.g., `integration.data-pools:data_push`, `intelligence.conversations:write`), and the OAuth client must also have the appropriate Celonis platform permissions on the relevant resources.",
     "actual_sources": [
       "https://developer.celonis.com/celonis-apis/auth",
       "https://developer.celonis.com/data-ingestion-api/getting-started"
@@ -740,15 +739,15 @@
     "confidence": 0.7788583040237427,
     "retrieved_sources": [
       "https://developer.celonis.com/celonis-apis/auth",
-      "https://developer.celonis.com/data-ingestion-api/getting-started",
-      "https://developer.celonis.com/data-ingestion-api/getting-started",
-      "https://developer.celonis.com/celonis-apis/auth",
       "https://developer.celonis.com/celonis-apis/migrating-to-oauth",
+      "https://developer.celonis.com/data-ingestion-api/getting-started",
       "https://developer.celonis.com/celonis-apis/auth",
+      "https://developer.celonis.com/process-intelligence-apis/agents-api/get-started/getting-started",
+      "https://developer.celonis.com/data-ingestion-api/getting-started",
       "https://developer.celonis.com/process-intelligence-apis/subscription-api/get-started/getting-started",
-      "https://developer.celonis.com/celonis-apis/get-started-with-celonis-apis",
       "https://developer.celonis.com/celonis-apis/auth",
-      "https://developer.celonis.com/process-intelligence-apis/agents-api/get-started/getting-started"
+      "https://developer.celonis.com/celonis-apis/auth",
+      "https://developer.celonis.com/celonis-apis/get-started-with-celonis-apis"
     ]
   },
   {
@@ -758,24 +757,23 @@
     "question_type": "multi_hop",
     "expected_answer": "On endpoints that use page-based pagination, `pageSize` defaults to 50 and `page` starts from 0. Omitting both parameters returns the first 50 items in the collection; to fetch subsequent pages, increment `page` up to the page that contains the last record (which depends on the total record count and the configured `pageSize`). Note that some APIs use cursor-based pagination instead \u2014 for example Audit Log API v2 and Platform Adoption API v2 use `pageToken`/`nextPageToken` rather than `page`/`pageSize`.",
     "expected_source": "https://developer.celonis.com/celonis-apis/pagination",
-    "actual_answer": "The default `pageSize` for Celonis API list endpoints is **50**, meaning a maximum of 50 items will be returned per call. If you omit both `page` and `pageSize`, the API will use the defaults: it will return the first page (page 0) with up to 50 items. This is consistent across both the general Celonis APIs and the Knowledge Model API pagination documentation.",
+    "actual_answer": "The default `pageSize` for Celonis API list endpoints is **50**, meaning a maximum of 50 items will be returned per call by default.\n\nIf you omit both `page` and `pageSize` parameters, the API will use their default values automatically:\n- `page` defaults to **0** (the first page)\n- `pageSize` defaults to **50**\n\nSo you will receive the first page of up to 50 items without needing to specify either parameter explicitly.",
     "actual_sources": [
       "https://developer.celonis.com/celonis-apis/pagination",
-      "https://developer.celonis.com/process-intelligence-apis/knowledge-model-api/get-started/pagination",
-      "https://developer.celonis.com/process-intelligence-apis/knowledge-model-api/get-started/getting-started"
+      "https://developer.celonis.com/process-intelligence-apis/knowledge-model-api/get-started/pagination"
     ],
-    "confidence": 0.5583176612854004,
+    "confidence": 0.5230392217636108,
     "retrieved_sources": [
-      "https://developer.celonis.com/celonis-apis/pagination",
-      "https://developer.celonis.com/celonis-apis/auth",
-      "https://developer.celonis.com/process-intelligence-apis/knowledge-model-api/get-started/pagination",
-      "https://developer.celonis.com/celonis-apis/migrating-to-oauth",
-      "https://developer.celonis.com/process-intelligence-apis/subscription-api/tutorials/learning/managing-subscription",
-      "https://developer.celonis.com/celonis-apis/get-started-with-celonis-apis",
       "https://developer.celonis.com/celonis-apis/get-started-with-celonis-apis",
       "https://developer.celonis.com/process-intelligence-apis/knowledge-model-api/get-started/getting-started",
+      "https://developer.celonis.com/process-intelligence-apis/subscription-api/tutorials/learning/managing-subscription",
+      "https://developer.celonis.com/celonis-apis/pagination",
+      "https://developer.celonis.com/celonis-apis/auth",
+      "https://developer.celonis.com/celonis-apis/migrating-to-oauth",
+      "https://developer.celonis.com/celonis-apis/get-started-with-celonis-apis",
+      "https://developer.celonis.com/cpm/developer/rest-api/reference/models/elementtype",
       "https://developer.celonis.com/process-intelligence-apis/knowledge-model-api/features/sorting",
-      "https://developer.celonis.com/cpm/developer/rest-api/reference/models/elementtype"
+      "https://developer.celonis.com/process-intelligence-apis/knowledge-model-api/get-started/pagination"
     ]
   }
 ]

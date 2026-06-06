@@ -16,3 +16,6 @@ REFUSAL_TEXT: str = os.getenv(
     "I don't have enough information to answer this question"
     " from the provided documentation.",
 )
+RERANK_ENABLED: bool = os.getenv("RERANK_ENABLED", "true").lower() == "true"
+RERANK_MODEL: str = os.getenv("RERANK_MODEL", "cross-encoder/ms-marco-MiniLM-L-6-v2")
+RERANK_TOP_N: int = int(os.getenv("RERANK_TOP_N", "10"))

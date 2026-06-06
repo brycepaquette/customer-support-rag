@@ -3,8 +3,10 @@ from collections import defaultdict
 import bm25s
 from langfuse import get_client, observe
 
+from .config import RERANK_ENABLED, RERANK_TOP_N
 from .embedder import embed_texts
 from .models import Chunk, RetrievedChunk
+from .reranker import rerank
 from .vector_store import HybridStore
 
 RRF_K = 60
@@ -61,21 +63,21 @@ def retrieve(
     dense_hits = _dense_search(store, query, FETCH_PER_RANKER)
     sparse_hits = _sparse_search(store, query, FETCH_PER_RANKER)
 
-    fused_ids = _rrf_fuse([dense_hits, sparse_hits])[:top_k]
+    # Over-fetch from RRF so the reranker has a real candidate pool.
+    # When rerank is disabled, fall back to the previous behaviour (top_k).
+    fetch_n = max(RERANK_TOP_N, top_k) if RERANK_ENABLED else top_k
+    fused_ids = _rrf_fuse([dense_hits, sparse_hits])[:fetch_n]
 
-    # Build lookup tables for assembling the final RetrievedChunk objects.
     dense_scores = dict(dense_hits)
     chunk_by_id = {c.chunk_id: c for c in store.chunks}
 
-    retrieved: list[RetrievedChunk] = []
+    candidates: list[RetrievedChunk] = []
     for chunk_id in fused_ids:
         c = chunk_by_id.get(chunk_id)
         if c is None:
             continue  # safety: id appeared in Chroma but not in chunk list
-        # Use the dense similarity if available, otherwise 0.0. This keeps the
-        # downstream `min(claude_conf, top_similarity)` heuristic well-defined.
         sim = dense_scores.get(chunk_id, 0.0)
-        retrieved.append(
+        candidates.append(
             RetrievedChunk(
                 chunk_id=c.chunk_id,
                 text=c.text,
@@ -86,13 +88,18 @@ def retrieve(
             )
         )
 
+    retrieved = rerank(query, candidates, top_k) if RERANK_ENABLED else candidates
+
     get_client().update_current_span(
         metadata={
             "top_k": top_k,
             "fetch_per_ranker": FETCH_PER_RANKER,
+            "rerank_enabled": RERANK_ENABLED,
+            "rerank_top_n": RERANK_TOP_N if RERANK_ENABLED else None,
             "num_results": len(retrieved),
             "top_score": retrieved[0].similarity_score if retrieved else None,
             "sources": [r.source for r in retrieved],
+            "pre_rerank_sources": [c.source for c in candidates],
             "dense_top_sources": [
                 chunk_by_id[cid].source
                 for cid, _ in dense_hits[:5]
