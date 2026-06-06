@@ -5,7 +5,7 @@ from langfuse import observe
 from .client import get_client
 from .config import REFUSAL_TEXT
 from .models import RAGResponse
-from .prompt_tester import prompt_tester
+from .prompt_tester import prompt_tester, strip_code_fences
 from .retrieval import retrieve
 from .vector_store import HybridStore
 
@@ -45,7 +45,7 @@ def rag_query(
         message=user_message,
     )
 
-    parsed = json.loads(_strip_fences(raw))
+    parsed = json.loads(strip_code_fences(raw))
 
     valid_sources = {c.source for c in retrieved}
     cited = [s for s in parsed["sources"] if s in valid_sources]

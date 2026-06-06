@@ -1,0 +1,122 @@
+[
+  {
+    "question_id": "q001",
+    "score": 5,
+    "reasoning": "The assistant's answer fully covers the expected answer: it recommends OAuth 2.0 as the preferred method and explains that API keys and Application keys are being discontinued. It also correctly notes the reasons (unlimited lifetime, cannot be rotated, broad access) implicitly by labeling them 'To be discontinued' and recommending migration. The answer goes beyond the reference with additional accurate detail about grant types, endpoints, and scopes, but contains no factual errors relative to the expected answer."
+  },
+  {
+    "question_id": "q002",
+    "score": 5,
+    "reasoning": "The assistant's answer covers all the key facts from the expected answer: recommending Postman as a free REST client, downloading it for your operating system, installing it, and either creating an account or clicking 'Skip and go to the app'. The additional note about using an existing REST client is a minor addition that doesn't contradict the expected answer."
+  },
+  {
+    "question_id": "q003",
+    "score": 4,
+    "reasoning": "The assistant's answer correctly includes the default Knowledge Model API limits (6,000 requests/day, 20 requests/second, 200 fields per request) that match the expected answer. It also provides additional details about other APIs and tiers that go beyond the reference answer, but these are not contradicted by the expected answer. The core facts are accurate and complete relative to the reference."
+  },
+  {
+    "question_id": "q005",
+    "score": 5,
+    "reasoning": "The assistant's answer is fully correct and complete, covering all the key facts from the expected answer: the URL pattern, the mandatory `fields` query parameter, case-sensitivity of field IDs, the example fields, the types of fields (Attributes, Augmented Attributes, Flags), and the 200-object maximum limit."
+  },
+  {
+    "question_id": "q007",
+    "score": 5,
+    "reasoning": "The assistant's answer is fully correct and complete, accurately stating the 429 status code and the x-ratelimit-reset header with its meaning, matching the reference answer exactly, and providing additional helpful detail."
+  },
+  {
+    "question_id": "q009",
+    "score": 5,
+    "reasoning": "The assistant's answer covers all the key facts from the expected answer: managing groups and users in the Celonis Platform, managing user identities across cloud-based applications, integrating identity providers like Active Directory and Okta for automatic provisioning, and that all SCIM operations are scoped to a team. The assistant also adds some additional accurate context without introducing any factual errors."
+  },
+  {
+    "question_id": "q010",
+    "score": 5,
+    "reasoning": "The assistant's answer is fully correct and complete, covering all key points from the expected answer: static keys have unlimited lifetime and no rotation, provide broad API access, while OAuth uses time-limited tokens and scopes following least privilege. It also correctly notes that static keys are being discontinued and OAuth is recommended. The assistant provides additional accurate detail beyond the reference answer."
+  },
+  {
+    "question_id": "q011",
+    "score": 4,
+    "reasoning": "The assistant's answer correctly covers the core pagination mechanics (page starting from 0, pageSize defaulting to 50) and adds accurate additional details about error handling and Knowledge Model API constraints. The only minor issue is the claim that 'the maximum number of items retrievable in each call is 50 records' when 50 is just the default, not a hard maximum for pageSize. Otherwise the answer is largely correct and complete relative to the reference."
+  },
+  {
+    "question_id": "q012",
+    "score": 5,
+    "reasoning": "The assistant's answer accurately covers all four stages described in the reference answer (create data push, push chunks, submit push job, list/monitor push jobs), correctly mentions micro-batching, Parquet/CSV formats, the 1 GB per chunk limit, no limit on number of chunks or combined size, and the asynchronous nature of job submission. All key facts align with the expected answer."
+  },
+  {
+    "question_id": "q013",
+    "score": 5,
+    "reasoning": "The assistant's answer covers all three authentication options with accurate details: OAuth client (recommended) with the correct scopes and data pool permission requirement, API key with the user-mirroring permissions and one-time display note, and Application key with the no-default-permissions detail. All key facts from the expected answer are present and correct."
+  },
+  {
+    "question_id": "q014",
+    "score": 5,
+    "reasoning": "The assistant's answer covers all the key points from the expected answer: non-industry-standard nature, unlimited lifetime and inability to rotate keys, overly broad access with no resource restriction, and OAuth 2.0's advantages including scopes, least privilege principle, and industry-standard status. The answer is factually complete and accurate."
+  },
+  {
+    "question_id": "q015",
+    "score": 5,
+    "reasoning": "The assistant's answer accurately covers all the key points from the expected answer: 401 is returned when no Bearer token is provided or the Authorization header is empty/invalid format (must start with Bearer or AppKey), and 403 is returned when authenticated but lacking permissions (ADMIN_ACCESS_ERROR) or when the API is disabled. The assistant also adds some additional correct details without introducing any factual errors."
+  },
+  {
+    "question_id": "q016",
+    "score": 4,
+    "reasoning": "The assistant correctly describes cursor-based pagination with nextPageToken and the audit.log OAuth scope. The minor issue is the addition of 'audit.log:read' as an alternative scope, which is not mentioned in the reference answer and may be fabricated. The rest of the pagination mechanics are accurate and complete."
+  },
+  {
+    "question_id": "q017",
+    "score": 5,
+    "reasoning": "The assistant's answer covers all three key steps from the reference: enabling SCIM (with the JIT prerequisite), setting up OAuth with the correct scope and permissions, and configuring the identity provider with the SCIM endpoint. It also includes the Azure-specific token endpoint format and mentions common identity providers implicitly. The additional detail about Bearer token authentication is accurate and complementary, not contradictory."
+  },
+  {
+    "question_id": "q018",
+    "score": 5,
+    "reasoning": "The assistant's answer covers all the key facts from the expected answer: Parquet (preferred) or CSV format, 1 GB chunk limit, no limit on number of chunks or combined size, and defining primary keys at the 'Create data push' stage for delta loading. The assistant also adds accurate supplementary details (FIFO processing, age column, schema evolution caveat) that are consistent with the documentation and don't contradict the expected answer."
+  },
+  {
+    "question_id": "q019",
+    "score": 5,
+    "reasoning": "The assistant's answer fully covers all the key facts in the expected answer: the standard error shape with title, status, detail, and errorCode fields; the exact 403 example matching the expected answer; the 429 rate-limit error with the x-ratelimit-reset header; and the distinction between the two error types. The assistant even provides additional accurate details (x-ratelimit-limit, x-ratelimit-remaining, empty body on disabled API 403) that go beyond the expected answer without contradicting it."
+  },
+  {
+    "question_id": "q020",
+    "score": 4,
+    "reasoning": "The assistant's answer correctly captures the core purpose and functionality of the Process Data Model API \u2014 reloading data models (complete or partial), RESTful nature, GET for retrieval, POST for triggering loads. However, it omits specific endpoint details (e.g., the exact URL patterns, the JSON array of table IDs for partial sync, and the requirement to have both data pool ID and data model ID visible in the platform URL)."
+  },
+  {
+    "question_id": "q021",
+    "score": 3,
+    "reasoning": "The assistant correctly identifies the endpoint, the mode parameter options (FULL/DELTA), and the OAuth scope requirement. However, it incorrectly claims the documentation doesn't specify the error for insufficient permissions, when the expected answer clearly states a 403 (Forbidden) with the specific error shape `{\"title\": \"Access Denied.\", \"status\": 403, \"detail\": \"Access is denied\", \"errorCode\": \"ADMIN_ACCESS_ERROR\"}` is returned. This is a meaningful gap since the question specifically asks about the error to expect when the token lacks permission."
+  },
+  {
+    "question_id": "q022",
+    "score": 4,
+    "reasoning": "The assistant's answer is mostly correct and covers all the key steps: creating the OAuth client with the right authentication method, selecting the correct scopes for all five APIs, assigning Admin & Settings permissions, and testing with Postman/curl. There is one minor typo in the SCIM scope name ('user-provisioning.scim' vs the expected 'user-provisoning.scim'), but this appears to be the correct spelling anyway. The assistant adds extra helpful detail (SCIM setup steps, token endpoint, Swagger UI testing) that goes beyond the reference but is not incorrect. The core factual content aligns well with the expected answer."
+  },
+  {
+    "question_id": "q023",
+    "score": 4,
+    "reasoning": "The assistant's answer correctly describes the cursor-based pagination mechanism, including the endpoint, the absence of pageToken on the first request, using nextPageToken for subsequent requests, and stopping when nextPageToken is absent or empty. It omits the authentication details (OAuth 2.0 Bearer token with the platform-adoption.tracking-events scope, or Application/API key) and the note about v1 being deprecated, but the core pagination instructions are accurate and complete."
+  },
+  {
+    "question_id": "q024",
+    "score": 4,
+    "reasoning": "The assistant correctly identifies the OAuth scope `authorization.permissions` and the base URL. It slightly omits the mention of alternative authentication methods (Application keys and API keys) that are also supported, but the core facts about the scope and base URL are accurate."
+  },
+  {
+    "question_id": "q025",
+    "score": 5,
+    "reasoning": "The assistant's answer accurately captures all the key distinctions: SCIM API for provisioning/managing users from an IdP (Active Directory, Okta), and Team API for reading/querying team membership and login history. It correctly identifies the read vs. write distinction and the IdP integration use case, aligning well with the reference answer. Minor details like specific endpoint URLs and OAuth scopes are omitted, but the conceptual content is fully correct and complete."
+  },
+  {
+    "question_id": "q029",
+    "score": 5,
+    "reasoning": "The assistant's answer covers all the key facts from the expected answer: using the Authorization header, OAuth 2.0 as the recommended approach with Bearer token, User API keys as Bearer tokens, Application keys as AppKey, the deprecation of static keys (unlimited lifetime/broad access implied by 'to be discontinued'), and that credentials in URL or body are ignored. The assistant also correctly mentions scopes and permissions for OAuth, aligning with the expected answer's mention of scopes."
+  },
+  {
+    "question_id": "q030",
+    "score": 4,
+    "reasoning": "The assistant correctly identifies the default pageSize as 50 and that omitting both parameters returns the first page (page 0) with up to 50 items. It misses the note about cursor-based pagination (pageToken/nextPageToken) used by some APIs like Audit Log API v2 and Platform Adoption API v2, but the core facts are accurate."
+  }
+]

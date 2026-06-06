@@ -21,6 +21,8 @@ class RunSummary(BaseModel):
     recall_at_10: float = Field(ge=0.0, le=1.0)
     refusal_accuracy: float = Field(ge=0.0, le=1.0)
     mean_confidence: float = Field(ge=0.0, le=1.0)
+    n_judged: int = Field(default=0, ge=0)
+    mean_judge_score: float | None = Field(default=None, ge=1.0, le=5.0)
 
 
 def _scoreable_non_edge(results: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -60,6 +62,13 @@ def mean_confidence(results: list[dict[str, Any]]) -> float:
     if not confidences:
         return 0.0
     return sum(confidences) / len(confidences)
+
+
+def mean_judge_score(judgements: list[dict[str, Any]]) -> float:
+    scores = [int(j["score"]) for j in judgements if "score" in j]
+    if not scores:
+        return 0.0
+    return sum(scores) / len(scores)
 
 
 def summarize(results: list[dict[str, Any]]) -> RunSummary:

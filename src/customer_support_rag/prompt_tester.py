@@ -43,3 +43,12 @@ def prompt_tester(
         },
     )
     return block.text
+
+
+def strip_code_fences(s: str) -> str:
+    """Strip ```...``` fences (with or without a language tag) from a model response."""
+    s = s.strip()
+    if s.startswith("```"):
+        s = s.split("\n", 1)[1] if "\n" in s else s
+        s = s.rsplit("```", 1)[0]
+    return s.strip()
